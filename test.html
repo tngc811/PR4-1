@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <input type="text" placeholder="アクセスキー入力" class="js--key"><input type="button" value="apply" class="js--apply" />
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  </head>
+  <body>
+    <script>
+
+(function(){
+  var url = 'https://api.gnavi.co.jp/RestSearchAPI/20150630/?callback=?';
+  //var encstr = encodeURI('大人のイタリアンバール');
+
+  var params = {
+    keyid: '',
+    format: 'json',
+    latitude: 34.702485,
+    longitude: 135.495951,
+    hit_per_page:100,
+    private_room : 1,
+  //  freeword: encodeURI('大人のイタリアンバール'),
+    range: 1
+  };
+  console.log(params);
+
+  var showResult = function(result){
+    if ( result.total_hit_count > 0 ) {
+      var res = '';
+      var res2 = '';
+      result.total_hit_count;
+      alert( result.total_hit_count + '件の結果が見つかりました。\n' );
+      alert( result.hit_per_page + '件の結果が見つかりました。\n' );
+
+      for ( var i in result.rest ){
+      //    res += result.rest[i].id + ' '+c+' '+ result.rest[i].name + ' ' + result.rest[i].access.line + ' ' + result.rest[i].access.station + ' ' + result.rest[i].access.walk + '分\n';
+          res2+='<tr><td><a href='+result.rest[i].url+'>'+result.rest[i].id+'</a></td><td>'+result.rest[i].name+'</td><td>'
+          +result.rest[i].opentime+'</td><td>'+result.rest[i].budget+'</td><td>'+result.rest[i].category+
+          '</td><td>'+result.rest[i].pr.pr_long+'</td></tr>';
+      }
+    //  alert(res);
+  //    $('.test').html(res2);
+      $('.test tbody > tr:last').after(res2)
+    } else {
+      alert( '検索結果が見つかりませんでした。' );
+    }
+  }
+
+  $(document).on('click', '.js--apply', function(){
+    params.keyid = $('.js--key').val();
+    $.getJSON(url, params, function(result){
+      showResult(result);
+    });
+  });
+
+})(jQuery);
+
+</script>
+<div class="test">
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>TIME</th>
+        <th>budget</th>
+        <th>category</th>
+        <th>pr_L</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      </tr>
+    </tbody>
+  </table>
+</div>
+  </body>
+</html>
