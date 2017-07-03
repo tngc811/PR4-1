@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>test</title>
+  </head>
+  <body>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb3Mm8zzsqCNFTr-_LNNkQMtYKTV000PA&callback=initMap" async defer></script>
+</script>
+<script type="text/javascript">
+if (navigator.geolocation) {
+  function srart_func() {
+    navigator.geolocation.getCurrentPosition(get_location,no_get_location) ;
+    var lat;
+    var log;
+  }
+
+  function get_location(argPos) {
+    lat = argPos.coords.latitude;          // 緯度
+    log = argPos.coords.longitude;         // 経度
+    console.log(lat,log);
+  }
+  function no_get_location(error) {
+    //.エラーコードの定義
+    var errorMessage = {
+  0: "原因不明のエラーが発生しました…。" ,
+  1: "位置情報の取得が許可されませんでした…。" ,
+  2: "電波状況などで位置情報が取得できませんでした…。" ,
+  3: "位置情報の取得に時間がかかり過ぎてタイムアウトしました…。" ,
+} ;
+  //エラーの表示
+  alert(errorMessage[error.code]);
+  }
+}else {
+  alert("")
+}
+
+</script>
+<input type="button" name="" onclick="srart_func()" value="test1">
+  </body>
+</html>
