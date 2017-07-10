@@ -7,51 +7,41 @@
     <title>Bootstrap Sample</title>
     <!-- BootstrapのCSS読み込み -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="bs-button-style/bs-button-style.min.css" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
-
     <!-- jQuery読み込み -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="jquery.location.js"></script>
     <!-- BootstrapのJS読み込み -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </head>
-  <body>
-<!--位置情報取得ファンクション-->
-    <script>
-      $(function() {
-        $('.location_btn').hoge();　//プラグイン呼び出し
-      });
-    </script>
 
-<nav class="navbar navbsar-default">
-  <div class="navbar-header">
-    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
-      <span class="sr-only">メニュー</span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </button>
-  </div>
-  <div id="gnavi" class="collapse navbar-collapse">
-    <ul class="nav navbar-nav">
-      <li><a href="">Link1</a></li>
-      <li><a href="">Link2</a></li>
-      <li><a href="">Link3</a></li>
-    </ul>
-  </div>
-</nav>
+  <body>
+    <nav class="navbar navbar-default">
+      <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
+            <span class="sr-only">メニュー</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <div id="gnavi" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="index.html">top</a></li>
+            <li><a href="login.html">login</a></li>
+          </ul>
+        </div>
+    </nav>
 
     <div class="container">
       <div class="row">
-        <div class="btn-group　btn-group-justified button_wrapper"　role="group">
-          <input type="button" name="location_btn" value="test" class="location_btn">
-          <button type="button" class="btn btn-lg btn-success btn-border location_btn">AAAAAA</button>
-          <button type="button" class="btn btn-lg btn-success btn-border">bbbbbb</button>
-          <a href="http://google.com" class="btn">button</a>
+        <!-- ボタン -->
+        <div class="wrapper">
+          <a href="search.html" class="btn">お店を検索</a>
+          <a href="random.html" class="btn">ランダム検索</a>
         </div>
       </div>
     </div>
-
   </body>
 </html>
