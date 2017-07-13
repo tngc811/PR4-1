@@ -7,15 +7,128 @@
     <title>Bootstrap Sample</title>
     <!-- BootstrapのCSS読み込み -->
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+        <link href="css/search.css" rel="stylesheet">
+
     <!-- jQuery読み込み -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="jquery.location.js"></script>
+    <!--google api-->
+
     <!-- BootstrapのJS読み込み -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
   </head>
 
 <body>
+
+<script>
+var res=""; //HTMLタグ変数
+var cnt=0;  //カウント変数
+var leg=""; //取得したshopデータのlength変数
+var shop_data="";　//ショップデータ変数
+function initMap() {
+
+}
+function load_btn() {　//次の十件読み込みのfunction
+  res="";
+  if (10>leg || leg-cnt<10) {　//次の読み見データが10件以下の場合
+    last_list();
+  }else {
+    for (var i = 0; i < 10; i++) {
+      res+='<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
+      +shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+      +shop_data.results.shop[cnt+i].name+'</h4><h4 class="hot_name">'+shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
+      +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+    }
+     $(".list_btn").remove();
+    cnt +=10;
+    res+='<input onclick="load_btn()" type="button" class="list_btn" value="次の十件読み込み">';
+    $('.hot_contents').filter(":last").after(res);
+  }
+}
+
+function last_list() { //最後のリスト表示function
+
+  res="";
+  if (cnt==0) { //初めから周辺のshopが十件以下の場合
+    for (var i = 0; i <leg%10; i++) {
+      res+='<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
+      +shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+      +shop_data.results.shop[cnt+i].name+'</h4><h4 class="hot_name">'+shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
+      +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+    }
+    $('.hot_list').after(res);
+  }else { //以上の場合
+  for (var i = 0; i <leg%10; i++) {
+    res+='<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
+    +shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+    +shop_data.results.shop[cnt+i].name+'</h4><h4 class="hot_name">'+shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
+    +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+  }
+  $(".list_btn").remove();
+  $('.hot_contents').filter(":last").after(res);
+  }
+}
+
+function set_shop_id(ele) {
+  localStorage.setItem('data',ele.id)　//webブランウザにshop_idをset
+  var id_value=ele.id;
+  window.location.href = 'shop_contents.html';
+}
+//検索結果取得処理
+  $(function () {
+    $('.gourmet_btn').click(function(){　//clickイベント
+      if ($('.gourmet_area').val()=="現在地") {　//現在地が選択された場合
+        function get_location(argPos) {　//位置情報GETfunction
+        hot(argPos);
+        }
+        navigator.geolocation.getCurrentPosition(get_location);　
+      }else {
+        alret("失敗1");
+      }
+    });
+    //ホットペッパーデータ取得
+    function hot(argPos) {
+        var lat = argPos.coords.latitude;          // 緯度
+        var lng = argPos.coords.longitude;         // 経度
+
+      var api_key="10f59688fc27c9e0";
+      var rep =  'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key='+api_key+'&lat='+lat+'&lng='+lng+'&range=1&order=4&count=100&format=jsonp';
+
+      $.ajax({
+          type:'GET',
+          url: rep,
+          dataType: 'jsonp',
+
+        success: function (data) {
+
+          shop_data="";
+          shop_data=data;
+          leg ="";
+          leg = data.results.shop.length
+
+          if (10>leg || leg-cnt<10) { //データが10件以下の場合
+            last_list();
+          }else{
+            if (leg > cnt) {
+              console.log(data.results.shop.length);
+              for (i = 0; i <10; i++) {
+                res+='<div id='+data.results.shop[i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
+                +data.results.shop[i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+                +data.results.shop[i].name+'</h4><h4 class="hot_name">'+data.results.shop[i].genre.name+'</h4><h4 class="hot_name">'
+                +data.results.shop[i].catch+'</h4><h4 class="hot_name">予算平均：'+data.results.shop[i].budget.average+'</h4></div>';
+              }
+              cnt +=10;
+              res+='<input onclick="load_btn()" type="button" class="list_btn" name="" value="次の十件読み込み">';
+              $('.hot_list').after(res);
+              res="";
+            }
+          }
+  }
+});
+    }
+  });
+</script>
+
+
   <nav class="navbar navbar-default">
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
@@ -34,13 +147,26 @@
       </div>
   </nav>
 
-<div class="container">
-<div class="row">
-<div class="wrapper">
-    <h1>お店を検索するのよ！</h1>
+  <form class="form-inline" style="border:#2600FF solid 1px;" action="" method="post">
+    <div class="form-group center-block">
+      <label>エリア<input type="search" autofocus="on" list="data1" class="gourmet_area form-control" name="login_name" /></label>
+      <label>ジャンル<input type="search" class="form-control" name="password" /></label>
+      <input class="gourmet_btn" type="button" value="登録">
+    </div>
+  </form>
+
+  <datalist id="data1">
+    <option value="現在地"></option>
+  </datalist>
+
+  <div class="gourmet_list container">
+    <div class="row">
+      <div class="hot_list col-xs-12">
+      </div>
+    </div>
+  </div>
 
 </div>
-</div>
-</div>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb3Mm8zzsqCNFTr-_LNNkQMtYKTV000PA&callback=initMap" async defer></script>
 </body>
 </html>

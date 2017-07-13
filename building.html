@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js"></script>
+  </head>
+  <body>
+    <script type="text/javascript">
+    $(function () {
+
+
+      $('.js--apply').click(function (){
+        alert("aa");
+        var address='東京都千代田区神田錦町３－１１';
+        var sensor="false";
+        var language="jp";
+        var rep =  'https://maps.googleapis.com/maps/api/geocode/json?address=&sensor='+sensor+'&language'+language;
+        $.ajax({
+          type:'GET',
+          url: rep,
+          dataType: 'json',
+
+          success: function (data) {
+            var res;
+            console.log(data);
+    }
+  });
+      });
+    });
+
+    </script>
+    <input type="button" value="apply" class="js--apply btn btn-info" />
+
+  </body>
+</html>

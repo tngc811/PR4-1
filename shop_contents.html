@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+     <!-- BootstrapのCSS読み込み -->
+   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+   <link href="style.css" rel="stylesheet">
+    <!-- jQuery読み込み -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <script>
+    var data = localStorage.getItem('data')
+    function a() {
+      console.log(data);
+    }
+    </script>
+
+<nav class="navbar navbar-default">
+  <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
+        <span class="sr-only">メニュー</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+
+    <div id="gnavi" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="index.html">top</a></li>
+        <li><a href="login.html">login</a></li>
+      </ul>
+    </div>
+</nav>
+<h1>お店の詳細ページ</h1>
+<div class="">
+  <button type="button" onclick="a()" name="button">aaaa</button>
+</div>
+  </body>
+</html>

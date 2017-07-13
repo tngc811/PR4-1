@@ -1,6 +1,6 @@
 (function($){
   $.fn.hoge=function(){
-  $(this).click(function(){
+//  $(this).click(function(){
     if (navigator.geolocation) {
       function get_location(argPos) {
         var lat;
@@ -21,7 +21,7 @@
     }else {
       alert("失敗２")
     }
-  });
+//  });
   };
 
 })(jQuery);
