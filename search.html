@@ -24,6 +24,11 @@ var res=""; //HTMLタグ変数
 var cnt=0;  //カウント変数
 var leg=""; //取得したshopデータのlength変数
 var shop_data="";　//ショップデータ変数
+var options ={
+  enableHighAccuracy: true,
+  timeout: 10000,
+  maximumAge: 0
+}
 function initMap() {
 }
 function load_btn() {　//次の十件読み込みのfunction
@@ -41,6 +46,7 @@ function load_btn() {　//次の十件読み込みのfunction
     cnt +=10;
     res+='<input onclick="load_btn()" type="button" class="list_btn" value="次の十件読み込み">';
     $('.hot_contents').filter(":last").after(res);
+    console.log("成功");
   }
 }
 function last_list() { //最後のリスト表示function
@@ -53,6 +59,7 @@ function last_list() { //最後のリスト表示function
       +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
     }
     $('.hot_list').after(res);
+    console.log("成功");
   }else { //以上の場合
   for (var i = 0; i <leg%10; i++) {
     res+='<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
@@ -62,6 +69,7 @@ function last_list() { //最後のリスト表示function
   }
   $(".list_btn").remove();
   $('.hot_contents').filter(":last").after(res);
+  console.log("成功");
   }
 }
 function set_shop_id(ele) {
@@ -73,10 +81,21 @@ function set_shop_id(ele) {
   $(function () {
     $('.gourmet_btn').click(function(){　//clickイベント
       if ($('.gourmet_area').val()=="現在地") {　//現在地が選択された場合
+
         function get_location(argPos) {　//位置情報GETfunction
         hot(argPos);
         }
-        navigator.geolocation.getCurrentPosition(get_location);　
+        function get_error(){
+          alert("失敗");
+        }
+        if (navigator.geolocation) {
+  console.log('Geolocation is supported!');
+  navigator.geolocation.getCurrentPosition(get_location,get_error,options);　
+}
+else {
+  console.log('Geolocation is not supported for this Browser/OS.');
+}
+
       }else {
         alret("失敗1");
       }
@@ -107,6 +126,7 @@ function set_shop_id(ele) {
                 +data.results.shop[i].name+'</h4><h4 class="hot_name">'+data.results.shop[i].genre.name+'</h4><h4 class="hot_name">'
                 +data.results.shop[i].catch+'</h4><h4 class="hot_name">予算平均：'+data.results.shop[i].budget.average+'</h4></div>';
               }
+              console.log("成功");
               cnt +=10;
               res+='<input onclick="load_btn()" type="button" class="list_btn" name="" value="次の十件読み込み">';
               $('.hot_list').after(res);
