@@ -33,9 +33,9 @@ function initMap() {
 }
 function load_btn() {　//次の十件読み込みのfunction
   res="";
-  if (10>leg || leg-cnt<10) {　//次の読み見データが10件以下の場合
+  if (10>leg || leg-cnt<10 || leg==cnt) {　//次の読み見データが10件以下の場合
     last_list();
-  }else {
+  }else {s
     for (var i = 0; i < 10; i++) {
       res+='<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
       +shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
