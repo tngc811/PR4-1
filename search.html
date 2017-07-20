@@ -35,7 +35,7 @@ function load_btn() {　//次の十件読み込みのfunction
   res="";
   if (10>leg || leg-cnt<10 || leg==cnt) {　//次の読み見データが10件以下の場合
     last_list();
-  }else {s
+  }else {
     for (var i = 0; i < 10; i++) {
       res+='<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
       +shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
@@ -44,9 +44,15 @@ function load_btn() {　//次の十件読み込みのfunction
     }
      $(".list_btn").remove();
     cnt +=10;
-    res+='<input onclick="load_btn()" type="button" class="list_btn" value="次の十件読み込み">';
-    $('.hot_contents').filter(":last").after(res);
-    console.log("成功");
+    if (cnt==leg) {
+      $('.hot_contents').filter(":last").after(res);
+      console.log("成功");
+    }else {
+      res+='<input onclick="load_btn()" type="button" class="list_btn" value="次の十件読み込み">';
+      $('.hot_contents').filter(":last").after(res);
+      console.log("成功");
+    }
+
   }
 }
 function last_list() { //最後のリスト表示function
