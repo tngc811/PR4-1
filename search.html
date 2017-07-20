@@ -25,7 +25,6 @@ var cnt=0;  //カウント変数
 var leg=""; //取得したshopデータのlength変数
 var shop_data="";　//ショップデータ変数
 function initMap() {
-
 }
 function load_btn() {　//次の十件読み込みのfunction
   res="";
@@ -44,9 +43,7 @@ function load_btn() {　//次の十件読み込みのfunction
     $('.hot_contents').filter(":last").after(res);
   }
 }
-
 function last_list() { //最後のリスト表示function
-
   res="";
   if (cnt==0) { //初めから周辺のshopが十件以下の場合
     for (var i = 0; i <leg%10; i++) {
@@ -67,7 +64,6 @@ function last_list() { //最後のリスト表示function
   $('.hot_contents').filter(":last").after(res);
   }
 }
-
 function set_shop_id(ele) {
   localStorage.setItem('data',ele.id)　//webブランウザにshop_idをset
   var id_value=ele.id;
@@ -89,23 +85,18 @@ function set_shop_id(ele) {
     function hot(argPos) {
         var lat = argPos.coords.latitude;          // 緯度
         var lng = argPos.coords.longitude;         // 経度
-
       var api_key="10f59688fc27c9e0";
       var rep =  'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key='+api_key+'&lat='+lat+'&lng='+lng+'&range=1&order=4&count=100&format=jsonp';
-
       $.ajax({
           type:'GET',
           url: rep,
           dataType: 'jsonp',
-
         success: function (data) {
-
           shop_data="";
           shop_data=data;
           leg ="";
           leg = data.results.shop.length
-
-          if (10>leg || leg-cnt<10) { //データが10件以下の場合
+          if (10>leg || leg-cnt<10 || 10==leg) { //データが10件以下の場合
             last_list();
           }else{
             if (leg > cnt) {
