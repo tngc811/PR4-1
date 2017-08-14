@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+     <!-- BootstrapのCSS読み込み -->
+   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery読み込み -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- BootstrapのJS読み込み -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+  </head>
+  <body>
+    <script>
+    $(function () {
+      $('.js--apply').click(function (e) {
+
+          //位置情報入れて！
+          var lat = 34.9849266;//緯度
+          var lng = 135.7527979;//経度
+
+          //↑の座標から1km以内の飲食店を10件取得(apiキーそのまま入れてます)
+          var rep =  'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=10f59688fc27c9e0'+'&lat='+lat+'&lng='+lng+'&range=1&order=4&count=10&format=jsonp';
+          //ホットペッパーAPIで店データを取得する(jsonp)
+          $.ajax({
+              type:'GET',
+              url: rep,
+              dataType: 'jsonp',
+            success: function (data) {
+              //デフォルトで１０件分のデータを取得しているので、その回数回す。
+              for (var i = 0; i < data.results.shop.length; i++) {
+
+                //店舗情報から時間に関わる部分を変数に入れる
+                var date = data.results.shop[i].open;
+
+                //～で分割し変数にデータを入れる。
+                var open = date.split('～');
+
+                  //～の回数だけ回す
+                  for(var j=0; j < open.length;j++){
+                    //new dateを使い分割した文字列を変換する。
+                    if(new Date("December 31, 1999 "+timedata[j].substr(-5)) != "Invalid Date" && j+1 < open.length){
+                      //変換できた場合、その配列の後ろから５文字と次の配列の始め５文字を取得
+                      console.log(open[j].substr(-5)+"～"+open[j+1].substr(0,5));
+                    }
+                  }
+                }
+              }
+            });
+          });
+        });
+    </script>
+    <div class="container-fluid">
+      <div class="test" class="container">
+        <div class="row">
+          <input type="button" value="apply" class="js--apply btn btn-info" />
+          <div class="table-responsive">
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
