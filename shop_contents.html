@@ -16,7 +16,31 @@
   </head>
   <body>
     <script>
-    var data = localStorage.getItem('data')
+    //--------------変数宣言--------------
+    var shop_id = localStorage.getItem('data');  //店ID
+    var rep = "";
+    var api_key = "";
+    //----------------------------------
+
+    if (shop_id != null) { //店IDの空白判定
+      console.log(shop_id);
+
+      function hot() {
+        console.log("hot");
+         api_key="10f59688fc27c9e0";
+         rep =  'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key='+api_key+'&id='+shop_id+'&range=1&order=4&count=100&format=jsonp';
+        $.ajax({
+          type:'GET',
+          url: rep,
+          dataType: 'jsonp',
+        success: function (data) {
+          console.log(data);
+        }
+        });
+      }
+    }else {
+      console.log("失敗");
+    }
     function a() {
       console.log(data);
     }
@@ -39,9 +63,14 @@
       </ul>
     </div>
 </nav>
+
 <h1>お店の詳細ページ</h1>
-<div class="">
-  <button type="button" onclick="a()" name="button">aaaa</button>
+<div class="container">
+  　<div class="row">
+  　  <div class="hot_contents col-xs-12">
+     <input type="button" onClick="hot()">
+  　  </div>
+  　</div>
 </div>
   </body>
 </html>

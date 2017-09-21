@@ -20,20 +20,25 @@
 <body>
 
 <script>
-var res=""; //HTMLタグ変数
-var cnt=0;  //カウント変数
-var leg=""; //取得したshopデータのlength変数
-var shop_data="";　//ショップデータ変数
-var options ={
+//--------------変数宣言--------------
+var res= ""; //HTMLタグ変数
+var cnt= 0;  //カウント変数
+var leg= ""; //取得したshopデータのlength変数
+var shop_data= "";　//ショップデータ変数
+var lat = "";          // 緯度
+var lng = "";      // 経度
+var options =　{
   enableHighAccuracy: true,
   timeout: 10000,
   maximumAge: 0
 }
+//----------------------------------
 function initMap() {
 }
+
 function load_btn() {　//次の十件読み込みのfunction
   res="";
-  if (10>leg || leg-cnt<10 || leg==cnt) {　//次の読み見データが10件以下の場合
+  if (10 > leg || leg-cnt < 10 || leg == cnt) {　//次の読み見データが10件以下の場合
     last_list();
   }else {
     for (var i = 0; i < 10; i++) {
@@ -43,108 +48,121 @@ function load_btn() {　//次の十件読み込みのfunction
       +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
     }
      $(".list_btn").remove();
-    cnt +=10;
-    if (cnt==leg) {
+    cnt += 10;
+    if (cnt == leg) {
       $('.hot_contents').filter(":last").after(res);
-      console.log("成功");
+      console.log("成功1");
     }else {
-      res+='<input onclick="load_btn()" type="button" class="list_btn" value="次の十件読み込み">';
-      $('.hot_contents').filter(":last").after(res);
-      console.log("成功");
+      res += '<input onclick="load_btn()" type="button" class="list_btn" value="次の十件読み込み">';
+      $('.hot_contents').filter(":lsast").after(res);
+      console.log("成功2");
     }
 
   }
 }
+
 function last_list() { //最後のリスト表示function
-  res="";
-  if (cnt==0) { //初めから周辺のshopが十件以下の場合
-    for (var i = 0; i <leg%10; i++) {
-      res+='<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
+  res = "";
+  if (cnt == 0) { //初めから周辺のshopが十件以下の場合
+    for (var i = 0; i < leg%10; i++) {
+      res += '<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
       +shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].name+'</h4><h4 class="hot_name">'+shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
     }
     $('.hot_list').after(res);
-    console.log("成功");
+    console.log("成功3");
   }else { //以上の場合
-  for (var i = 0; i <leg%10; i++) {
-    res+='<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
+  for (var i = 0; i < leg%10; i++) {
+    res += '<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
     +shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
     +shop_data.results.shop[cnt+i].name+'</h4><h4 class="hot_name">'+shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
     +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
   }
   $(".list_btn").remove();
   $('.hot_contents').filter(":last").after(res);
-  console.log("成功");
+  console.log("成功4");
   }
 }
+
 function set_shop_id(ele) {
   localStorage.setItem('data',ele.id)　//webブランウザにshop_idをset
-  var id_value=ele.id;
+  var id_value = ele.id;
   window.location.href = 'shop_contents.html';
 }
 //検索結果取得処理
   $(function () {
-    $('.gourmet_btn').click(function(){　//clickイベント
-      if ($('.gourmet_area').val()=="現在地") {　//現在地が選択された場合
+    $('.gourmet_btn').click(function(){　//class:gourmet_btn,clickイベント
 
+        if (lat != "") {
+        lat = "";          // 緯度
+        lng = "";      // 経度
+        alert("初期っか");
+
+      }else  if ($('.gourmet_area').val()=="現在地") {  //現在地が選択された場合
         function get_location(argPos) {　//位置情報GETfunction
         hot(argPos);
         }
+
         function get_error(){
           alert("失敗");
         }
-        if (navigator.geolocation) {
-  console.log('Geolocation is supported!');
-  navigator.geolocation.getCurrentPosition(get_location,get_error,options);　
-}
-else {
-  console.log('Geolocation is not supported for this Browser/OS.');
-}
 
-      }else {
-        alret("失敗1");
+        if (navigator.geolocation) {
+            console.log('Geolocation is supported!');
+            navigator.geolocation.getCurrentPosition(get_location,get_error,options);
+        }else {
+          console.log('Geolocation is not supported for this Browser/OS.');
+        }
+      }else{
+        console.log("失敗01");
       }
     });
+
     //ホットペッパーデータ取得
     function hot(argPos) {
-        var lat = argPos.coords.latitude;          // 緯度
-        var lng = argPos.coords.longitude;         // 経度
+      /*
+         lat = argPos.coords.latitude;          // 緯度
+         lng = argPos.coords.longitude;         // 経度
+         */
+         lat = 34.675057;          // 緯度
+         lng = 135.500377;         // 経度
       var api_key="10f59688fc27c9e0";
       var rep =  'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key='+api_key+'&lat='+lat+'&lng='+lng+'&range=1&order=4&count=100&format=jsonp';
       $.ajax({
-          type:'GET',
-          url: rep,
-          dataType: 'jsonp',
-        success: function (data) {
-          shop_data="";
-          shop_data=data;
-          leg ="";
-          leg = data.results.shop.length
-          if (10>leg || leg-cnt<10 || 10==leg) { //データが10件以下の場合
-            last_list();
-          }else{
-            if (leg > cnt) {
-              console.log(data.results.shop.length);
-              for (i = 0; i <10; i++) {
-                res+='<div id='+data.results.shop[i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
-                +data.results.shop[i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-                +data.results.shop[i].name+'</h4><h4 class="hot_name">'+data.results.shop[i].genre.name+'</h4><h4 class="hot_name">'
-                +data.results.shop[i].catch+'</h4><h4 class="hot_name">予算平均：'+data.results.shop[i].budget.average+'</h4></div>';
-              }
-              console.log("成功");
-              cnt +=10;
-              res+='<input onclick="load_btn()" type="button" class="list_btn" name="" value="次の十件読み込み">';
-              $('.hot_list').after(res);
-              res="";
+        type:'GET',
+        url: rep,
+        dataType: 'jsonp',
+      success: function (data) {
+        shop_data = "";
+        shop_data = data;
+        leg ="";
+        leg = data.results.shop.length
+        if (10 > leg || leg-cnt < 10 || 10 == leg) { //データが10件以下の場合
+          last_list();
+        }else{
+          if (leg > cnt) {
+            console.log(data.results.shop.length);
+            res = "";
+            for (i = 0; i <10; i++) {
+              res += '<div id='+data.results.shop[i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
+              +data.results.shop[i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+              +data.results.shop[i].name+'</h4><h4 class="hot_name">'+data.results.shop[i].genre.name+'</h4><h4 class="hot_name">'
+              +data.results.shop[i].catch+'</h4><h4 class="hot_name">予算平均：'+data.results.shop[i].budget.average+'</h4></div>';
             }
+            console.log("成功01");
+            cnt += 10;
+            res += '<input onclick="load_btn()" type="button" class="list_btn" name="" value="次の十件読み込み">';
+            $(".hot_contents").remove();
+            $('.hot_list').after(res);
+            res = "";
           }
-  }
-});
+        }
+      }
+      });
     }
   });
 </script>
-
 
   <nav class="navbar navbar-default">
     <div class="navbar-header">
@@ -163,27 +181,31 @@ else {
         </ul>
       </div>
   </nav>
-
+<!--検索フォーム-->
   <form class="form-inline" style="border:#2600FF solid 1px;" action="" method="post">
     <div class="form-group center-block">
       <label>エリア<input type="search" autofocus="on" list="data1" class="gourmet_area form-control" name="login_name" /></label>
       <label>ジャンル<input type="search" class="form-control" name="password" /></label>
-      <input class="gourmet_btn" type="button" value="登録">
+      <input class="gourmet_btn" type="button" value="OK">
     </div>
   </form>
 
   <datalist id="data1">
     <option value="現在地"></option>
+
+    ※エリアには現在地取得の際には、現在地と入力してください。
   </datalist>
 
+<!--jqueryで取得したデータを追加-->
   <div class="gourmet_list container">
     <div class="row">
       <div class="hot_list col-xs-12">
+        <div class="hot_contents">
+        </div>
       </div>
     </div>
   </div>
 
-</div>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb3Mm8zzsqCNFTr-_LNNkQMtYKTV000PA&callback=initMap" async defer></script>
 </body>
 </html>
