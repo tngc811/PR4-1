@@ -13,38 +13,71 @@
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <!-- BootstrapのJS読み込み -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
-  </head>
-  <body>
     <script>
+
     //--------------変数宣言--------------
-    var shop_id = localStorage.getItem('data');  //店ID
-    var rep = "";
-    var api_key = "";
+    var hot_shop_id = localStorage.getItem('data');  //店ID
+    var hot_rep = ""; //ホットペッパーget用変数
+    var hot_api_key = ""; //ホットペッパーapi_key
+    var hot_get = ""; //ホットペッパーデータ格納用
+    var keyid = ""; //ぐるなびapi_key
+    var g_rep = ""; //ぐるなびget用変数
+    var g_get = ""; //ぐるなびデータ格納用
+    var params = "" ; //　ぐるなびget設定変数
+    var showResult = ""; //
     //----------------------------------
 
-    if (shop_id != null) { //店IDの空白判定
-      console.log(shop_id);
+    if (hot_shop_id != null) {  //店IDの空白判定
+      hot();　//ホットペッパーデータ取得関数
 
       function hot() {
         console.log("hot");
-         api_key="10f59688fc27c9e0";
-         rep =  'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key='+api_key+'&id='+shop_id+'&range=1&order=4&count=100&format=jsonp';
+         hot_api_key="10f59688fc27c9e0";
+         hot_rep =  'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key='+hot_api_key+'&id='+hot_shop_id+'&range=1&order=4&count=100&format=jsonp';
         $.ajax({
           type:'GET',
-          url: rep,
+          url: hot_rep,
           dataType: 'jsonp',
         success: function (data) {
+          hot_get = data;
           console.log(data);
+          gurunabi();　//ぐるなびデータ取得関数
         }
         });
       }
     }else {
       console.log("失敗");
     }
-    function a() {
-      console.log(data);
-    }
+
+      showResult = function(result){
+     if ( result.total_hit_count > 0 ) {
+         console.log(result.total_hit_count);
+           g_get = result;
+       console.log(g_get);
+     } else {
+       alert( '検索結果が見つかりませんでした。' );
+     }
+   }
+
+   function gurunabi () {
+
+     g_rep = 'https://api.gnavi.co.jp/RestSearchAPI/20150630/?callback=?';
+
+       params = {
+       keyid: '06ebf6157586406aeebdc819d9ff3998',
+       format: 'json',
+       name: hot_get.results.shop[0].name,
+     };
+
+     $.getJSON(g_rep, params, function(result){
+       console.log("guru");
+       showResult(result);
+     });
+   }
+
     </script>
+  </head>
+  <body>
 
 <nav class="navbar navbar-default">
   <div class="navbar-header">
@@ -68,7 +101,7 @@
 <div class="container">
   　<div class="row">
   　  <div class="hot_contents col-xs-12">
-     <input type="button" onClick="hot()">
+
   　  </div>
   　</div>
 </div>

@@ -63,6 +63,6 @@ echo $_SESSION['UserID'];
 
 
 //↓リダイレクト処理、(レビューページに飛ばせばいいと思う)
-header('location:../../login.html');
+header('location:../../PR4/login.html');
 //処理を終了させる
 exit();

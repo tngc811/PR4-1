@@ -21,9 +21,9 @@
 
 <script>
 //--------------変数宣言--------------
-var res= ""; //HTMLタグ変数
-var cnt= 0;  //カウント変数
-var leg= ""; //取得したshopデータのlength変数
+var res　= ""; //HTMLタグ変数
+var cnt　= 0;  //カウント変数
+var leg　= ""; //取得したshopデータのlength変数
 var shop_data= "";　//ショップデータ変数
 var lat = "";          // 緯度
 var lng = "";      // 経度
@@ -38,11 +38,16 @@ function initMap() {
 
 function load_btn() {　//次の十件読み込みのfunction
   res="";
-  if (10 > leg || leg-cnt < 10 || leg == cnt) {　//次の読み見データが10件以下の場合
+  console.log(leg);
+  console.log(cnt);
+  if (10 > leg || leg - cnt < 10 || leg == cnt) {　//次の読み見データが10件以下の場合
+
     last_list();
   }else {
+
     for (var i = 0; i < 10; i++) {
-      res+='<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
+
+      res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
       +shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].name+'</h4><h4 class="hot_name">'+shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
@@ -50,14 +55,15 @@ function load_btn() {　//次の十件読み込みのfunction
      $(".list_btn").remove();
     cnt += 10;
     if (cnt == leg) {
+
       $('.hot_contents').filter(":last").after(res);
       console.log("成功1");
     }else {
+
       res += '<input onclick="load_btn()" type="button" class="list_btn" value="次の十件読み込み">';
-      $('.hot_contents').filter(":lsast").after(res);
+      $('.hot_contents').filter(":last").after(res);
       console.log("成功2");
     }
-
   }
 }
 
@@ -93,73 +99,118 @@ function set_shop_id(ele) {
 //検索結果取得処理
   $(function () {
     $('.gourmet_btn').click(function(){　//class:gourmet_btn,clickイベント
-
-        if (lat != "") {
-        lat = "";          // 緯度
-        lng = "";      // 経度
-        alert("初期っか");
-
-      }else  if ($('.gourmet_area').val()=="現在地") {  //現在地が選択された場合
-        function get_location(argPos) {　//位置情報GETfunction
-        hot(argPos);
-        }
-
-        function get_error(){
-          alert("失敗");
-        }
-
-        if (navigator.geolocation) {
-            console.log('Geolocation is supported!');
-            navigator.geolocation.getCurrentPosition(get_location,get_error,options);
-        }else {
-          console.log('Geolocation is not supported for this Browser/OS.');
-        }
-      }else{
-        console.log("失敗01");
-      }
+      $('.gourmet_btn').attr('disabled',true);
+      area_get(); //緯度経度取得
     });
 
+    function area_get() {
+      if (lat != "") {
+      lat = "";          // 緯度
+      lng = "";      // 経度
+      $(".hot_contents").remove();
+      $(".list_btn").remove();
+
+    //  alert("初期っか");
+    area_get();
+    console.log("初期化");
+
+    }else if($('.gourmet_area').val()　==　"現在地") {  //現在地が選択された場合
+
+      function get_location(argPos) {　//位置情報GETfunction
+        lat = argPos.coords.latitude;          // 緯度
+        lng = argPos.coords.longitude;         // 経度
+      hot();
+      }
+
+      function get_error(){
+        alert("失敗");
+      }
+
+      if (navigator.geolocation) {
+          console.log('Geolocation is supported!');
+          navigator.geolocation.getCurrentPosition(get_location,get_error,options);
+      }else {
+        console.log('Geolocation is not supported for this Browser/OS.');
+      }
+    }else if ($('.gourmet_area').val() != "") {　
+      searchArea ($('.gourmet_area').val());
+    }else{
+      console.log("失敗01");
+    }
+    }
+
+    searchArea = function(area_data){
+
+      var area_rep = 'https://maps.googleapis.com/maps/api/geocode/json?address='+area_data+'&sensor=false';
+      if(area_data != ''){
+        $.ajax({
+            type:'GET',
+            url: area_rep,
+            dataType: 'json',
+          success: function (data) {
+
+            console.log(area_data+'で検索');
+            console.log(data);
+            console.log(data.results[0].geometry.location);
+            console.log(data.results[0].geometry.location.lat);
+            console.log(data.results[0].geometry.location.lng);
+            console.log(data.results[0].formatted_address);
+            lat = data.results[0].geometry.location.lat;          // 緯度
+            lng = data.results[0].geometry.location.lng;         // 経度
+            hot();
+          }
+        });
+      }
+    }
+
     //ホットペッパーデータ取得
-    function hot(argPos) {
-      /*
-         lat = argPos.coords.latitude;          // 緯度
-         lng = argPos.coords.longitude;         // 経度
-         */
-         lat = 34.675057;          // 緯度
-         lng = 135.500377;         // 経度
-      var api_key="10f59688fc27c9e0";
-      var rep =  'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key='+api_key+'&lat='+lat+'&lng='+lng+'&range=1&order=4&count=100&format=jsonp';
-      $.ajax({
-        type:'GET',
-        url: rep,
-        dataType: 'jsonp',
-      success: function (data) {
-        shop_data = "";
-        shop_data = data;
-        leg ="";
-        leg = data.results.shop.length
-        if (10 > leg || leg-cnt < 10 || 10 == leg) { //データが10件以下の場合
-          last_list();
-        }else{
-          if (leg > cnt) {
-            console.log(data.results.shop.length);
-            res = "";
-            for (i = 0; i <10; i++) {
-              res += '<div id='+data.results.shop[i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
-              +data.results.shop[i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-              +data.results.shop[i].name+'</h4><h4 class="hot_name">'+data.results.shop[i].genre.name+'</h4><h4 class="hot_name">'
-              +data.results.shop[i].catch+'</h4><h4 class="hot_name">予算平均：'+data.results.shop[i].budget.average+'</h4></div>';
+    function hot() {
+      if ($('.gourmet_area').val() != "") {
+        console.log("ああああｌｂふぁｌ；");
+        var api_key="10f59688fc27c9e0";
+        var rep =  'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key='+api_key+'&lat='+lat+'&lng='+lng+'&range=1&order=4&count=100&format=jsonp';
+        $.ajax({
+          type:'GET',
+          url: rep,
+          dataType: 'jsonp',
+        success: function (data) {
+          shop_data = "";
+          shop_data = data;
+          leg ="";
+          leg = data.results.shop.length
+          console.log(leg);
+          if (10 > leg || leg - cnt < 10 || 10 == leg) { //データが10件以下の場合
+            last_list();
+          }else{ //10件以上
+            if (leg > cnt) {
+              console.log(data.results.shop.length);
+              res = "";
+              for (i = 0; i <10; i++) {
+                res += '<div id='+data.results.shop[i].id+' class="hot_contents" onclick="set_shop_id(this);"><img src='
+                +data.results.shop[i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+                +data.results.shop[i].name+'</h4><h4 class="hot_name">'+data.results.shop[i].genre.name+'</h4><h4 class="hot_name">'
+                +data.results.shop[i].catch+'</h4><h4 class="hot_name">予算平均：'+data.results.shop[i].budget.average+'</h4></div>';
+              }
+              console.log("成功01");
+              cnt += 10;
+              res += '<input onclick="load_btn()" type="button" class="list_btn" name="" value="次の十件読み込み">';
+              $(".hot_contents").remove();
+              $('.hot_list').after(res);
+              res = "";
             }
-            console.log("成功01");
-            cnt += 10;
-            res += '<input onclick="load_btn()" type="button" class="list_btn" name="" value="次の十件読み込み">';
-            $(".hot_contents").remove();
-            $('.hot_list').after(res);
-            res = "";
           }
         }
+        });
+
+      }else {
+        console.log("テキストボックス空白");
       }
-      });
+
+
+
+      //   lat = 34.675057;          // 緯度
+      //   lng = 135.500377;         // 経度
+      $(".gourmet_btn").prop('disabled', false);
     }
   });
 </script>

@@ -5,7 +5,7 @@ height: 100%;
 body{
   height: 100%;
 
-  background-image:url("../img/aaaa.jpg");
+/*  background-image:url("../img/aaaa.jpg");
 /* 画像を常に天地左右の中央に配置 */
   background-position: center center;
 
