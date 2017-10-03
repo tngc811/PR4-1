@@ -32,37 +32,37 @@ var options =　{
   timeout: 10000,
   maximumAge: 0
 }
+var i = 0; // for文用変数
 //----------------------------------
 function initMap() {
 }
 
+function add_res() {
+  res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
+  +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+  +shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
+  +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+}
+
 function load_btn() {　//次の十件読み込みのfunction
   res="";
-  console.log(leg);
-  console.log(cnt);
+//  console.log(leg);
+//  console.log(cnt);
   if (10 > leg || leg - cnt < 10 || leg == cnt) {　//次の読み見データが10件以下の場合
-
     last_list();
   }else {
-
-    for (var i = 0; i < 10; i++) {
-
-      res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
-      +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-      +shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
-      +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+    for ( i = 0; i < 10; i++) {
+      add_res();
     }
      $(".list_btn").remove();
     cnt += 10;
     if (cnt == leg) {
-
       $('.hot_contents').filter(":last").after(res);
-      console.log("成功1");
+    //  console.log("成功1");
     }else {
-
       res += '<input onclick="load_btn()" type="button" class="list_btn" value="次の十件読み込み">';
       $('.hot_contents').filter(":last").after(res);
-      console.log("成功2");
+    //  console.log("成功2");
     }
   }
 }
@@ -70,62 +70,47 @@ function load_btn() {　//次の十件読み込みのfunction
 function last_list() { //最後のリスト表示function
   res = "";
   if (leg == 0) {
-    console.log("0件ですよ～");
+  //  console.log("0件ですよ～");
     if (leg == 0) {
         res += '<div class="hot_contents"><h1>検索結果0件です</h1></div>';
     }else if(leg == 10) {
 
-      for (var i = 0; leg % 10; i++) {
-        res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
-        +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-        +shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
-        +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+      for ( i = 0; leg % 10; i++) {
+        add_res ();
       }
-      $('.hot_list').after(res); ///////////////////////////////////afaaaaaaaaaaaaaaaaaaaaaaaaaa
     }else {
-
-      for (var i = 0; i < leg % 10; i++) {
-
-        res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
-        +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-        +shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
-        +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+      for ( i = 0; i < leg % 10; i++) {
+        add_res ();
       }
-      $('.hot_list').after(res);
     }
+    $('.hot_list').after(res);
   }else if (shop_data.results.shop.length < 11) {
   //  console.log(leg);
   //  console.log(shop_data.results.shop.length);
     cnt = 0;
     leg = shop_data.results.shop.length ;
-    for (var i = 0; i < leg; i++) {
-      res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
-      +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-      +shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
-      +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+    for ( i = 0; i < leg; i++) {
+      add_res ();
     }
   //  $(".hot_contents").remove();
 //    $(".list_btn").remove();
     $('.hot_list').after(res);
   }else { //10以上の場合
 //    console.log(leg);
-  for (var i = 0; i < leg % 10; i++) {
-
-    res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
-    +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-    +shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
-    +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+  for ( i = 0; i < leg % 10; i++) {
+    add_res ();
   }
   $(".list_btn").remove();
   $('.hot_contents').filter(":last").after(res);
   }
 }
 
-function set_shop_id(ele) {
-  localStorage.setItem('data',ele.id)　//webブランウザにshop_idをset
+function set_shop_id(ele) { //webブランウザにshop_idをset
+  localStorage.setItem('data',ele.id)　
   var id_value = ele.id;
   window.location.href = 'shop_contents.html';
 }
+
 //検索結果取得処理
   $(function () {
     $('.gourmet_btn').click(function(){　//class:gourmet_btn,clickイベント
@@ -139,7 +124,6 @@ function set_shop_id(ele) {
       lng = "";      // 経度
       $(".hot_contents").remove();
       $(".list_btn").remove();
-
     //  alert("初期っか");
     area_get();
     console.log("初期化");
@@ -186,7 +170,6 @@ function set_shop_id(ele) {
       function get_error(){
         alert("失敗");
       }
-
       if (navigator.geolocation) {
           console.log('Geolocation is supported!');
           navigator.geolocation.getCurrentPosition(get_location,get_error,options);
@@ -210,7 +193,6 @@ function set_shop_id(ele) {
             url: area_rep,
             dataType: 'json',
           success: function (data) {
-
         //    console.log($('.gourmet_area').val()+'で検索');
         //  console.log(data);
         //    console.log(data.results[0].geometry.location);
@@ -226,7 +208,6 @@ function set_shop_id(ele) {
             }else {
               alert("ジャンル失敗")
             }
-
           }
         });
       }
@@ -246,20 +227,17 @@ function set_shop_id(ele) {
           shop_data = data;
           leg ="";
           leg = data.results.shop.length
-          console.log(leg);
+    //      console.log(leg);
           if (10 > leg || leg - cnt < 10 || 10 == leg) { //データが10件以下の場合
             last_list();
           }else{ //10件以上
             if (leg > cnt) {
-              console.log(data.results.shop.length);
+        //      console.log(data.results.shop.length);
               res = "";
               for (i = 0; i <10; i++) {
-                res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
-                +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-                +shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
-                +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+                add_res ();
               }
-              console.log("成功01");
+        //      console.log("成功01");
               cnt += 10;
               res += '<input onclick="load_btn()" type="button" class="list_btn" name="" value="次の十件読み込み">';
               $(".hot_contents").remove();
@@ -269,13 +247,9 @@ function set_shop_id(ele) {
           }
         }
         });
-
       }else {
         console.log("テキストボックス空白");
       }
-
-
-
       //   lat = 34.675057;          // 緯度
       //   lng = 135.500377;         // 経度
       $(".gourmet_btn").prop('disabled', false);
@@ -294,24 +268,19 @@ function set_shop_id(ele) {
         shop_data = "";
         shop_data = data;
         leg ="";
-        console.log(data);
-
+  //      console.log(data);
         leg = data.results.shop.length
 
         if (10 > leg || leg - cnt < 10 || 10 == leg) { //データが10件以下の場合
-          console.log("hfbnskafk");
           last_list();
         }else{ //10件以上
           if (leg > cnt) {
-            console.log(data.results.shop.length);
+      //      console.log(data.results.shop.length);
             res = "";
             for (i = 0; i <10; i++) {
-              res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
-              +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-              +shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'
-              +shop_data.results.shop[cnt+i].catch+'</h4><h4 class="hot_name">予算平均：'+shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+              add_res ();
             }
-            console.log("成功01");
+        //    console.log("成功01");
             cnt += 10;
             res += '<input onclick="load_btn()" type="button" class="list_btn" name="" value="次の十件読み込み">';
             $(".hot_contents").remove();
@@ -319,7 +288,6 @@ function set_shop_id(ele) {
             res = "";
           }
         }
-
       }
       });
 
@@ -328,6 +296,8 @@ function set_shop_id(ele) {
     }
     $(".gourmet_btn").prop('disabled', false);
   }
+
+
 </script>
 
   <nav class="navbar navbar-default">
