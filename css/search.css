@@ -28,11 +28,14 @@ a:active { color:#0000ff; text-decoration:none }
   width: 90%;
   margin: 2%;
 }
-.hot_contents{
 
+.img-rounded{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
-.hot_name{
-  background-color:rgba(228, 255, 236, 0.62);
-  width: auto;
-  margin: 1% auto 1% autos ;
+
+.hot_contents{
+  margin: 10px;
+  border: 1px solid #000000;
 }
