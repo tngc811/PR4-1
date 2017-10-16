@@ -34,11 +34,33 @@
     function initMap() {}
 
     function add_res() {
-        res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
-      +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-      +shop_data.results.shop[cnt+i].genre.name+' / </h4><h4 class="hot_name"><img src="img/yen.png">'
-      +shop_data.results.shop[cnt+i].budget.average+'</h4><h4 class="hot_name">'
-      +shop_data.results.shop[cnt+i].catch+'</h4></div>';
+      if (shop_data.results.shop[cnt+i].budget.average != "") { // 予算が空白じゃなかったら
+        if(window.innerWidth >= 767){　// PCで開いた時の表示
+          res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents sinfo" onclick="set_shop_id(this);"><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.pc.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].genre.name+' / <img src="img/yen.png">'
+          +shop_data.results.shop[cnt+i].budget.average+'</h4><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].catch+'</h4></div>';
+        }else{　//スマホ
+          res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents sinfo" onclick="set_shop_id(this);"><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].genre.name+' / <img src="img/yen.png">'
+          +shop_data.results.shop[cnt+i].budget.average+'</h4><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].catch+'</h4></div>';
+        }
+      }else { // 予算が空白だったら
+        if(window.innerWidth >= 767){　// PCで開いた時の表示
+          res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents sinfo" onclick="set_shop_id(this);"><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'+shop_data.results.shop[cnt+i].budget.average+'</h4><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].catch+'</h4></div>';
+        }else{　//スマホ
+          res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents sinfo" onclick="set_shop_id(this);"><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].genre.name+'</h4><h4 class="hot_name">'+shop_data.results.shop[cnt+i].budget.average+'</h4><h4 class="hot_name">'
+          +shop_data.results.shop[cnt+i].catch+'</h4></div>';
+        }
+      }
     }
 
     function load_btn() {　 //次の十件読み込みのfunction
@@ -102,7 +124,7 @@
       }
     }
 
-    function set_shop_id(ele) { //webブランウザにshop_idをset
+    function set_shop_id(ele) { //webブラウザにshop_idをset
       localStorage.setItem('data', ele.id)　
       var id_value = ele.id;
       window.location.href = 'shop_contents.html';
