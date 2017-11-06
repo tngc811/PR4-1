@@ -13,12 +13,17 @@
   <!--google api-->
   <!-- BootstrapのJS読み込み -->
   <script src="bootstrap/js/bootstrap.min.js"></script>
+
+  <!--jquery.cookie.js読み込み-->
+  <script type="text/javascript" src="js/jquery.cookie.js"></script>
+
 </head>
 
 <body>
   <script>
     //--------------変数宣言--------------
     var res　 = ""; //HTMLタグ変数
+    var cookie_res;
     var cnt　 = 0; //カウント変数
     var leg　 = ""; //取得したshopデータのlength変数
     var shop_data = "";　 //ショップデータ変数
@@ -31,14 +36,35 @@
     }
     var i = 0; // for文用変数
     //----------------------------------
+/*
+    $(function(){
+      $.cookie("a","値");
+      var c =$.cookie("a");
+      alert(c);
+    });
+*/
     function initMap() {}
 
-    function add_res() {
+    function add_res() {　//HTML生成
         res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].genre.name+' / </h4><h4 class="hot_name"><img src="img/yen.png">'
       +shop_data.results.shop[cnt+i].budget.average+'</h4><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].catch+'</h4></div>';
+
+      cookie_res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
+    +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
+    +shop_data.results.shop[cnt+i].genre.name+' / </h4><h4 class="hot_name"><img src="img/yen.png">'
+    +shop_data.results.shop[cnt+i].budget.average+'</h4><h4 class="hot_name">'
+    +shop_data.results.shop[cnt+i].catch+'</h4></div>';
+    }
+
+    function html_add() {
+      $('.hot_contents').filter(":last").after(res);
+    }
+
+    function html_add2() {
+      $('.hot_list').after(res);
     }
 
     function load_btn() {　 //次の十件読み込みのfunction
@@ -54,12 +80,14 @@
         $(".list_btn").remove();
         cnt += 10;
         if (cnt == leg) {
-          $('.hot_contents').filter(":last").after(res);
+          //$('.hot_contents').filter(":last").after(res);
           //  console.log("成功1");
+          html_add();
         } else {
           res += '<input onclick="load_btn()" type="button" class="list_btn" value="次の十件読み込み">';
-          $('.hot_contents').filter(":last").after(res);
+          //$('.hot_contents').filter(":last").after(res);
           //  console.log("成功2");
+          html_add();
         }
       }
     }
@@ -80,7 +108,7 @@
             add_res();
           }
         }
-        $('.hot_list').after(res);
+        html_add2();
       } else if (shop_data.results.shop.length < 11) {
         //  console.log(leg);
         //  console.log(shop_data.results.shop.length);
@@ -91,22 +119,31 @@
         }
         //  $(".hot_contents").remove();
         //    $(".list_btn").remove();
-        $('.hot_list').after(res);
+        //$('.hot_list').after(res);
+        html_add2();
       } else { //10以上の場合
         //    console.log(leg);
         for (i = 0; i < leg % 10; i++) {
           add_res();
         }
         $(".list_btn").remove();
-        $('.hot_contents').filter(":last").after(res);
+        //$('.hot_contents').filter(":last").after(res);
+        html_add();
       }
     }
 
-    function set_shop_id(ele) { //webブランウザにshop_idをset
+    function set_shop_id(ele) { //webブランウザにshop_idをset,ページ遷移
       localStorage.setItem('data', ele.id)　
       var id_value = ele.id;
       window.location.href = 'shop_contents.html';
+      /*
+      $(function(){
+        $.cookie( 'cookie_res' ,cookie_res);
+      });
+      */
     }
+
+
 
     //検索結果取得処理
     $(function() {
@@ -237,7 +274,7 @@
                   cnt += 10;
                   res += '<input onclick="load_btn()" type="button" class="list_btn" name="" value="次の十件読み込み">';
                   $(".hot_contents").remove();
-                  $('.hot_list').after(res);
+                  html_add2();
                   res = "";
                 }
               }
@@ -280,7 +317,7 @@
                 cnt += 10;
                 res += '<input onclick="load_btn()" type="button" class="list_btn" name="" value="次の十件読み込み">';
                 $(".hot_contents").remove();
-                $('.hot_list').after(res);
+                html_add2();
                 res = "";
               }
             }
@@ -292,6 +329,8 @@
       }
       $(".gourmet_btn").prop('disabled', false);
     }
+
+
   </script>
 
   <nav class="navbar navbar-default">

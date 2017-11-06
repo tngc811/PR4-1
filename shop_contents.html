@@ -1,114 +1,327 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title></title>
-     <!-- BootstrapのCSS読み込み -->
-   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-   <link href="style.css" rel="stylesheet">
-    <!-- jQuery読み込み -->
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <!-- BootstrapのJS読み込み -->
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <!-- BootstrapのCSS読み込み -->
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
+  <link href="style.css" rel="stylesheet">
+  <!-- jQuery読み込み -->
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <!-- BootstrapのJS読み込み -->
+  <script src="bootstrap/js/bootstrap.min.js"></script>
+  <script>
     //--------------変数宣言--------------
-    var hot_shop_id = localStorage.getItem('data');  //店ID
+    var res　 = ""; //HTMLタグ変数
+    var hot_shop_id = localStorage.getItem('data'); //店ID
     var hot_rep = ""; //ホットペッパーget用変数
-    var hot_api_key = ""; //ホットペッパーapi_key
+    const hot_api_key　 = 　"10f59688fc27c9e0"; //ホットペッパーapi_key
     var hot_get = ""; //ホットペッパーデータ格納用
     var keyid = ""; //ぐるなびapi_key
     var g_rep = ""; //ぐるなびget用変数
     var g_get = ""; //ぐるなびデータ格納用
-    var params = "" ; //　ぐるなびget設定変数
+    var params = ""; //　ぐるなびget設定変数
+    var hot_p = ""; //ホットペッパー住所
+    var guru_p = ""; //ぐるなび住所
     var showResult = ""; //
+    var cnt = 0; //カウント変数
+    var cnt2 = 0; //カウント変数
+    var flag = 0; //フラグ変数
+    var i; //for文用
+    var r; //フラグ変数
     //----------------------------------
 
-    if (hot_shop_id != null) {  //店IDの空白判定
-      hot();　//ホットペッパーデータ取得関数
+    //*********************HTML生成***************************
+
+    function add_res() {　 //HTML生成
+      res　 += 　'<div id=' + hot_get.results.shop[0].id + ' class="hot_contents" ><h4 class="hot_name">' +
+        hot_get.results.shop[0].name + '</h4><img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">' +
+        hot_get.results.shop[0].genre.name + ' / </h4><h4 class="hot_name"><img src="img/yen.png">' +
+        hot_get.results.shop[0].budget.average + '</h4><h4 class="hot_name">' +
+        hot_get.results.shop[0].catch + '</h4><h4>' + g_get.rest.url_mobile + '</h4><h4>' + g_get.rest.coupon_url.mobile + '</h4><img src=' + g_get.rest.image_url.shop_image1 + ' /><h4>' +
+        g_get.rest.image_url.shop_image1 + '</h4><h4>' + g_get.rest.pr.pr_short + '</h4>';
+
+      if ("[object Object]" != g_get.rest.budget) {
+        res += '<h4>' + g_get.rest.budget + '</h4>';
+      } else {
+        res += '<h4>データなし</h4>'
+      }
+      if ("[object Object]" != g_get.rest.party) {
+        res += '<h4>' + g_get.rest.party + '</h4>';
+      } else {
+        res += '<h4>データなし</h4>'
+      }
+      if ("[object Object]" != g_get.rest.lunch) {
+        res += '<h4>' + g_get.rest.lunch + '</h4>';
+      } else {
+        res += '<h4>データなし</h4>'
+      }
+      if ("[object Object]" != g_get.rest.credit_card) {
+        res += '<h4>' + g_get.rest.credit_card + '</h4>';
+      } else {
+        res += '<h4>データなし</h4>'
+      }
+      if ("[object Object]"　 != 　g_get.rest.e_money) {
+        res += '<h4>' + g_get.rest.e_money + '</h4>';
+      } else {
+        res += '<h4>データなし</h4>'
+      }
+      res += '</div>';
+    }
+
+    function add_res2() {
+      console.log(r);
+      cnt = 0;
+      res　 += 　'<div id=' + hot_get.results.shop[cnt].id + ' class="hot_contents" ><h4 class="hot_name">' +
+        hot_get.results.shop[cnt].name + '</h4><img src=' + hot_get.results.shop[cnt].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">' +
+        hot_get.results.shop[cnt].genre.name + ' / </h4><h4 class="hot_name"><img src="img/yen.png">' +
+        hot_get.results.shop[cnt].budget.average + '</h4><h4 class="hot_name">' +
+        hot_get.results.shop[cnt].catch + '</h4><h4>' + g_get.rest[r].url_mobile + '</h4><h4>' + g_get.rest[r].coupon_url.mobile + '</h4><img src=' + g_get.rest[r].image_url.shop_image1 + ' /><h4>' +
+        g_get.rest[r].image_url.shop_image1 + '</h4><h4>' + g_get.rest[r].pr.pr_short + '</h4>';
+
+      if ("[object Object]" != g_get.rest[r].budget) {
+        res += '<h4>' + g_get.rest[r].budget + '</h4>';
+      } else {
+        res += '<h4>データなし</h4>'
+      }
+      if ("[object Object]" != g_get.rest[r].party) {
+        res += '<h4>' + g_get.rest[r].party + '</h4>';
+      } else {
+        res += '<h4>データなし</h4>'
+      }
+      if ("[object Object]" != g_get.rest[r].lunch) {
+        res += '<h4>' + g_get.rest[r].lunch + '</h4>';
+      } else {
+        res += '<h4>データなし</h4>'
+      }
+      if ("[object Object]" != g_get.rest[r].credit_card) {
+        res += '<h4>' + g_get.rest[r].credit_card + '</h4>';
+      } else {
+        res += '<h4>データなし</h4>'
+      }
+      if ("[object Object]"　 != 　g_get.rest[r].e_money) {
+        res += '<h4>' + g_get.rest[r].e_money + '</h4>';
+      } else {
+        res += '<h4>データなし</h4>'
+      }
+      res += '</div>';
+    }
+
+    function add_res3() {
+      res　 += 　'<div id=' + hot_get.results.shop[0].id + ' class="hot_contents"><h4 class="hot_name">' +
+        hot_get.results.shop[0].name + '</h4><img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">' +
+        hot_get.results.shop[0].genre.name + ' / </h4><h4 class="hot_name"><img src="img/yen.png">' +
+        hot_get.results.shop[0].budget.average + '</h4><h4 class="hot_name">' +
+        hot_get.results.shop[0].catch + '</h4></div>';
+    }
+
+    //*********************************************************
+
+    function a() {
+      var test = 0;
+      for (var f = 0; f < hot_p.length; f++) {
+        if (guru_p.charAt(f) == hot_p.charAt(f)) {
+          test = f;
+
+        } else {
+          break;
+        }
+      }
+      if (flag <= test) {
+        flag = test;
+        r = i;
+      }
+    }
+
+    function b() {
+      add_res2();
+    }
+
+    if (hot_shop_id != null) { //店IDの空白判定
+      hot();　 //ホットペッパーデータ取得関数
 
       function hot() {
-//        console.log("hot");
-         hot_api_key="10f59688fc27c9e0";
-         hot_rep =  'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key='+hot_api_key+'&id='+hot_shop_id+'&range=1&order=4&count=100&format=jsonp';
+        //        console.log("hot");
+        hot_rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + hot_api_key + '&id=' + hot_shop_id + '&range=1&order=4&count=100&format=jsonp';
         $.ajax({
-          type:'GET',
+          type: 'GET',
           url: hot_rep,
           dataType: 'jsonp',
-        success: function (data) {
-          hot_get = data;
-          console.log(data);
-          gurunabi();　//ぐるなびデータ取得関数
-        }
+          success: function(data) {
+            hot_get = data;
+            console.log(data);
+            gurunabi();　 //ぐるなびデータ取得関数
+          }
         });
       }
-    }else {
+    } else {
       console.log("失敗");
     }
 
-      showResult = function(result){
-     if ( result.total_hit_count > 0 ) {
-       console.log("match成功");
-         console.log(result.total_hit_count);
-           g_get = result;
-       console.log(g_get);
-     } else {
-       alert( '検索結果が見つかりませんでした。' );
-     }
-   }
+    showResult = function(result) {
+      g_get = result;
 
-   function gurunabi () {
+      if (result.total_hit_count == 1) { //1件だけヒットした場合
+        console.log("match成功1");
+        //  console.log(result.total_hit_count);
 
-     g_rep = 'https://api.gnavi.co.jp/RestSearchAPI/20150630/?callback=?';
-     console.log(hot_get.results.shop[0].address);
-     console.log(hot_get.results.shop[0].name);
-       params = {
-       keyid: '06ebf6157586406aeebdc819d9ff3998',
-       format: 'json',
-       address:hot_get.results.shop[0].address,
-     };
+        if (g_get.rest.address.charAt(0) == "〒") {
 
-     $.getJSON(g_rep, params, function(result){
-       console.log("guru");
-       showResult(result);
-     });
-   }
 
-/*
-function hiraToKana(str) {
-    return str.replace(/[\u3041-\u3096]/g, function(match) {
+
+          hot_p = hot_get.results.shop[0].address.replace(/\s+/g, "").replace(/[‐－―]/g, '-').replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+            return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
+          });
+
+          guru_p = g_get.rest.address.replace(/\s+/g, "").replace(/[‐－―]/g, '-').replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+            return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
+          }).slice(9);
+
+          add_res();
+          $('.hot_contents').filter(":last").after(res); //HMLTを追加
+          console.log(hot_get);
+          console.log(g_get);
+          console.log(hot_p);
+          console.log(guru_p);
+
+        } else {
+          console.log("エラー");
+        }
+
+      } else if (result.total_hit_count > 1) { // 1件以上ヒットした場合
+        console.log("match成功2");
+        console.log(result.total_hit_count);
+        //  console.log(hot_get.results.shop[0].address);
+        g_get = result;
+        console.log(result);
+
+        hot_p = hot_get.results.shop[0].address.replace(/\s+/g, "").replace(/[‐－―]/g, '-').replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+          return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
+        }); //0-9や大角など変換
+
+        for (i = 0; i < result.total_hit_count; i++) {
+          if (g_get.rest[i].address.charAt(0) == "〒") {
+
+            guru_p = g_get.rest[i].address.replace(/\s+/g, "").replace(/[‐－―]/g, '-').replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
+              return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
+            }).slice(9);
+            if (hot_p == guru_p) {
+              console.log(hot_p);
+              console.log(guru_p);
+              break;
+            } else {
+              console.log("複数件失敗");
+              a();
+            }
+          } else {
+
+          }
+        }
+        b();
+        $('.hot_contents').filter(":last").after(res);
+
+      } else { //0件の場合
+        console.log(cnt);
+        if (cnt != 3) {
+          gurunabi()
+        } else {
+          console.log("あうととととっと2");
+          add_res3();
+          $('.hot_contents').filter(":last").after(res);
+        }
+      }
+      cnt += 1;
+    }
+
+    function gurunabi() { //検索条件を変えていく
+
+      g_rep = 'https://api.gnavi.co.jp/RestSearchAPI/20150630/?callback=?';
+      if (cnt == 0) {
+        console.log("cnt=0");
+        params = {
+          keyid: '06ebf6157586406aeebdc819d9ff3998',
+          format: 'json',
+          name: hot_get.results.shop[0].name,
+        };
+      } else if (cnt == 1) {
+        console.log("cnt=1");
+        params = {
+          keyid: '06ebf6157586406aeebdc819d9ff3998',
+          format: 'json',
+          address: hot_get.results.shop[0].address,
+        };
+      } else if (cnt == 2) {
+        console.log("cnt=2");
+        var str = hiraToKana(hot_get.results.shop[0].name_kana);
+        //console.log(str);
+        params = {
+          keyid: '06ebf6157586406aeebdc819d9ff3998',
+          format: 'json',
+          name_kana: str,
+        };
+      } else {
+        console.log("あうととととっと");
+      }
+
+      $.getJSON(g_rep, params, function(result) {
+        showResult(result);
+      });
+    }
+    /*
+        function gurunabi2() {
+          console.log("gurunabi2");
+          g_rep = 'https://api.gnavi.co.jp/RestSearchAPI/20150630/?callback=?';
+          console.log(hot_get.results.shop[0].address);
+          console.log(hot_get.results.shop[0].name);
+          params = {
+            keyid: '06ebf6157586406aeebdc819d9ff3998',
+            format: 'json',
+            name: hot_get.results.shop[0].name,
+          };
+
+          $.getJSON(g_rep, params, function(result) {
+            console.log("guru");
+            showResult(result);
+          });
+        }
+
+    */
+    function hiraToKana(str) {　 //ひらがなをカタカナへ変換
+      return str.replace(/[\u3041-\u3096]/g, function(match) {
         var chr = match.charCodeAt(0) + 0x60;
         return String.fromCharCode(chr);
-    });
-}
-*/
-/*
-function check(txt)
-{
-	var　data1 = txt.match(/^[0-9-]{6,9}$|^[0-9-]{12}$/);
-	var data2 = txt.match(/^\d{1,4}-\d{4}$|^\d{2,5}-\d{1,4}-\d{4}$/);
-  if (!data1 && !data2) {
-    console.log("不正");
-    console.log(data1);
-    console.log(data2);
-    return String.fromCharCode(data1);
-  }else {
-    console.log("正規表現");
-    console.log(data1);
-    console.log(data2);
-    return String.fromCharCode(data1);
-  }
-}
-*/
-    </script>
-  </head>
-  <body>
+      });
+    }
 
-<nav class="navbar navbar-default">
-  <div class="navbar-header">
+    /*
+    function check(txt)
+    {
+    	var　data1 = txt.match(/^[0-9-]{6,9}$|^[0-9-]{12}$/);
+    	var data2 = txt.match(/^\d{1,4}-\d{4}$|^\d{2,5}-\d{1,4}-\d{4}$/);
+      if (!data1 && !data2) {
+        console.log("不正");
+        console.log(data1);
+        console.log(data2);
+        return String.fromCharCode(data1);
+      }else {
+        console.log("正規表現");
+        console.log(data1);
+        console.log(data2);
+        return String.fromCharCode(data1);
+      }
+    }
+    */
+  </script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-default">
+    <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#gnavi">
         <span class="sr-only">メニュー</span>
         <span class="icon-bar"></span>
@@ -123,15 +336,19 @@ function check(txt)
         <li><a href="login.html">login</a></li>
       </ul>
     </div>
-</nav>
+  </nav>
 
-<h1>お店の詳細ページ</h1>
-<div class="container">
-  　<div class="row">
-  　  <div class="hot_contents col-xs-12">
+  <h1>お店の詳細ページ</h1>
+  <div class="container">
 
-  　  </div>
-  　</div>
-</div>
-  </body>
+    <div class="row">
+
+      <div class="hot_contents col-xs-12">
+
+      </div>
+    </div>
+  </div>
+
+</body>
+
 </html>
