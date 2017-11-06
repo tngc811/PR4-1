@@ -45,7 +45,7 @@
 */
     function initMap() {}
 
-=======
+
     function add_res() {　//HTML生成
         res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents" onclick="set_shop_id(this);"><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
@@ -66,7 +66,7 @@
 
     function html_add2() {
       $('.hot_list').after(res);
->>>>>>> 詳細
+
     }
 
     function load_btn() {　 //次の十件読み込みのfunction
@@ -136,7 +136,7 @@
 
 
     function set_shop_id(ele) { //webブランウザにshop_idをset,ページ遷移
->>>>>>> 詳細
+
       localStorage.setItem('data', ele.id)　
       var id_value = ele.id;
       window.location.href = 'shop_contents.html';
