@@ -271,50 +271,13 @@
         showResult(result);
       });
     }
-    /*
-        function gurunabi2() {
-          console.log("gurunabi2");
-          g_rep = 'https://api.gnavi.co.jp/RestSearchAPI/20150630/?callback=?';
-          console.log(hot_get.results.shop[0].address);
-          console.log(hot_get.results.shop[0].name);
-          params = {
-            keyid: '06ebf6157586406aeebdc819d9ff3998',
-            format: 'json',
-            name: hot_get.results.shop[0].name,
-          };
 
-          $.getJSON(g_rep, params, function(result) {
-            console.log("guru");
-            showResult(result);
-          });
-        }
-
-    */
     function hiraToKana(str) {　 //ひらがなをカタカナへ変換
       return str.replace(/[\u3041-\u3096]/g, function(match) {
         var chr = match.charCodeAt(0) + 0x60;
         return String.fromCharCode(chr);
       });
     }
-
-    /*
-    function check(txt)
-    {
-    	var　data1 = txt.match(/^[0-9-]{6,9}$|^[0-9-]{12}$/);
-    	var data2 = txt.match(/^\d{1,4}-\d{4}$|^\d{2,5}-\d{1,4}-\d{4}$/);
-      if (!data1 && !data2) {
-        console.log("不正");
-        console.log(data1);
-        console.log(data2);
-        return String.fromCharCode(data1);
-      }else {
-        console.log("正規表現");
-        console.log(data1);
-        console.log(data2);
-        return String.fromCharCode(data1);
-      }
-    }
-    */
   </script>
 </head>
 
