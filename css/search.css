@@ -35,7 +35,17 @@ a:active { color:#0000ff; text-decoration:none }
   margin-right: auto;
 }
 
+/* 検索結果レイアウト */
 .sinfo{
   margin: 10px;
+  padding: 5px;
   border: 1px solid #000000;
+  width: 350px;
+  height: 350px;
+  float: left;
+
+  /* かどまる */
+  border-radius: 10px;
+  -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */
+  -moz-border-radius: 10px;   /* Firefox用 */
 }
