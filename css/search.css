@@ -41,8 +41,26 @@ a:active { color:#0000ff; text-decoration:none }
   padding: 5px;
   border: 1px solid #000000;
   width: 350px;
-  height: 350px;
+  height: 300px;
   float: left;
+
+  /* かどまる */
+  border-radius: 10px;
+  -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */
+  -moz-border-radius: 10px;   /* Firefox用 */
+}
+
+/* エリア入力フォームとか */
+form {
+  text-align: center;
+}
+
+/* 検索する！ぼたん */
+.gourmet_btn{
+  color:#FFF;
+  background-color:#ff8181;
+  padding:5px;
+  width: 70px;
 
   /* かどまる */
   border-radius: 10px;
