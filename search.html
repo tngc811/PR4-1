@@ -49,15 +49,13 @@
     function add_res() {　//HTML生成
         res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents sinfo" onclick="set_shop_id(this);"><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-      +shop_data.results.shop[cnt+i].genre.name+' / </h4><h4 class="hot_name"><img src="img/yen.png">'
-      +shop_data.results.shop[cnt+i].budget.average+'</h4><h4 class="hot_name">'
-      +shop_data.results.shop[cnt+i].catch+'</h4></div>';
+      +shop_data.results.shop[cnt+i].genre.name+' / <img src="img/yen.png">'
+      +shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
 
       cookie_res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents sinfo" onclick="set_shop_id(this);"><h4 class="hot_name">'
     +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
-    +shop_data.results.shop[cnt+i].genre.name+' / </h4><h4 class="hot_name"><img src="img/yen.png">'
-    +shop_data.results.shop[cnt+i].budget.average+'</h4><h4 class="hot_name">'
-    +shop_data.results.shop[cnt+i].catch+'</h4></div>';
+    +shop_data.results.shop[cnt+i].genre.name+' / <img src="img/yen.png">'
+    +shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
     }
 
     function html_add() {
@@ -86,7 +84,7 @@
           //  console.log("成功1");
           html_add();
         } else {
-          res += '<input onclick="load_btn()" type="button" class="list_btn" value="次の十件読み込み">';
+          res += '<input onclick="load_btn()" type="button" class="list_btn" value=" ＞　">';
           //$('.hot_contents').filter(":last").after(res);
           //  console.log("成功2");
           html_add();
@@ -355,10 +353,9 @@
     </div>
   </nav>
   <!--検索フォーム-->
-  <form class="form-inline" style="border:#2600FF solid 1px;" action="" method="post">
+  <form class="form-inline" action="" method="post">
     <div class="form-group center-block">
-      <label>エリア<input type="search" autofocus="on" list="data1" class="gourmet_area form-control" name="login_name" /></label>
-      <label>ジャンル
+      <input type="search" placeholder="エリアを入力してね" autofocus="on" list="data1" class="gourmet_area form-control" name="login_name" />
         <select class="form-control genre" name="">
           <option value="G000">---ジャンルを選択---</option>
           <option value="G001">居酒屋</option>
@@ -378,8 +375,7 @@
           <option value="G015">カフェ・スイーツ</option>
           <option value="G016">その他グルメ</option>
         </select>
-      </label>
-      <input class="gourmet_btn" type="button" value="OK">
+      <input class="gourmet_btn" type="button" value="検索">
     </div>
   </form>
   <datalist id="data1">
