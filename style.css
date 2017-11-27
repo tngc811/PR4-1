@@ -1,6 +1,6 @@
 body{
   height: 100%;
-  
+
 /* 画像を常に天地左右の中央に配置 */
   background-position: center center;
 
@@ -63,6 +63,7 @@ body{
       top: -webkit-calc(100% - 3px);
       top: calc(100% - 3px);
   }
+
 }
 @media screen and (min-width:768px){
     /*　PC　*/
@@ -72,17 +73,6 @@ body{
       padding: 200px;
     }
 
-/*
-    .left{
-      text-align: center;
-      padding: 200px;
-      margin: 20px;
-    }
-
-    .right{
-      text-align: center;
-    }
-*/
     /* メニューボタンデザイン */
     .btn{
         display: inline-block;
