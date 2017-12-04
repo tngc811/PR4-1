@@ -9,10 +9,20 @@
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <link href="css/shop_contents.css" rel="stylesheet">
+    <link href="css/sweetalert2.css" rel="stylesheet">
+
+    <link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.min.css" />
   <!-- jQuery読み込み -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
   <!-- BootstrapのJS読み込み -->
   <script src="bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="js/sweetalert2.js"></script>
+  <!-- ratyのJS読み込み -->
+  <script src="js/jquery.raty.js" type="text/javascript"></script>
+
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
   <script>
     //--------------変数宣言--------------
     var res　 = ""; //HTMLタグ変数
@@ -32,12 +42,42 @@
     var flag = 0; //フラグ変数
     var i; //for文用
     var r; //フラグ変数
+    //緯度経度
+    var shoplat ;
+    var shoplog ;
+
+    //androidかiPhoneを調べる変数
+    var isiPhone = 0;
+    var isAndroid = 0;
+    //機種判別用
+  //  var ua = navigator.userAgent.toLowerCase();
     //----------------------------------
+
+
+alert("ルート検索時、位置情報を使用します");
+    function initMap() {
+      //ユーザーエージェントを調べる
+      // Geolocation APIに対応しているかどうか
+
+
+      if (navigator.geolocation) {
+        //alert("この端末では位置情報が取得できます");
+      // Geolocation APIに対応していない
+      } else {
+    //  alert("この端末では位置情報が取得できません");
+      }
+    }
 
     //*********************HTML生成***************************
 
+
     function add_res() {　 //HTML生成
       console.log("SEIKOU");
+
+      shoplat = hot_get.results.shop[0].lat;
+      shoplog = hot_get.results.shop[0].lng;
+
+      console.log(hot_get.results.shop[0].lat);
 
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
       res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
@@ -142,6 +182,10 @@
       console.log("成功４５６５４３２４３４");
       cnt = 0;
 
+      shoplat = hot_get.results.shop[0].lat;
+      shoplog = hot_get.results.shop[0].lng;
+
+
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
       res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
 
@@ -244,6 +288,10 @@
     }
 
     function add_res3() {
+
+      shoplat = hot_get.results.shop[0].lat;
+      shoplog = hot_get.results.shop[0].lng;
+
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
       res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
 
@@ -343,6 +391,8 @@
             return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
           }).slice(9);
 
+
+
           add_res();
           $('.hot_contents').filter(":last").after(res); //HMLTを追加
           console.log(hot_get);
@@ -440,10 +490,180 @@
         return String.fromCharCode(chr);
       });
     }
+
+
+
+
+    $(function () {
+      var lat;
+      var log;
+
+
+      function cmanGetOk(argPos){
+
+        lat = argPos.coords.latitude;          // 緯度
+        log = argPos.coords.longitude;         // 経度
+        console.log(lat);
+        console.log(log);
+
+      }
+
+        navigator.geolocation.getCurrentPosition(cmanGetOk);
+
+
+
+      //ボタン押されたとき
+      $('.js--apply').click(function (e) {
+
+
+
+
+          if (isAndroid > 0){
+
+            //google map起動(現在地から目的地までのルート)
+            location.href = 'https://maps.google.com/maps?daddr='+shoplat+','+shoplog+'&saddr='+lat+','+log;
+          } else{
+
+            //アップルのマップを起動(現在地から目的地までのルート)
+            location.href = 'http://maps.apple.com/maps?daddr=' + shoplat + ',' + shoplog+'&saddr='+lat+','+log;
+          }
+
+
+
+
+        });
+
+    });
+
+
+    $(function() {
+
+      $("#Dialog_form").dialog({
+        autoOpen: false,
+        modal: true,
+        title: "ダイアログのタイトル",
+        open: function(event, ui) {
+          $(".ui-dialog-titlebar-close").hide();
+        },
+        buttons: [ // ボタン名 : 処理 を設定
+          {
+            text: '送信',
+            click: function() {
+              /*
+              ReviewFormの空白判定
+              */
+
+              if ($('.sei').val() != "") {//性別
+                var sei = $('.sei').val();
+              }else {
+                var sei = 3;
+              }
+              if ($('.age').val() != "") {//年齢
+                var age = $('.age').val();
+              }else {
+                var age = 0;
+              }
+              if ($('.h_num').val()　!=　 "") {
+                var h_num =　$('.h_num').val();
+              }else {
+                var h_num =　0;
+              }
+              if ($('.volume').val()!= "") {
+                var volume =　$('.volume').val();
+              }else {
+                var volume =0;
+              }
+              if ($('.atm').val()!= "") {
+                var atm =$('.atm').val();
+              }else {
+                var atm =0;
+              }
+              if ($('#rateit1').raty('score')!= "") {
+                var score =$('#rateit1').raty('score');
+              }else {
+                var score =0;
+              }
+
+              var b = $('.sei').val();
+            //  var score = $('#rateit1').raty('score');
+
+              $.ajax({
+                type: 'POST',
+                url: './test1.php',
+                data: {
+                  sei: sei,
+                  age: age,
+                  h_num: h_num,
+                  volume: volume,
+                  atm: atm,
+                  score: score
+                },
+                success: function(data) {
+                  console.log("送信成功");
+                  console.log(data);
+
+                }
+              });
+              alert("ボタン1をクリックしました");
+              console.log(b);
+              console.log(score);
+            }
+          },
+          {
+            text: '閉じる',
+            class: 'btn-delete',
+            click: function() {
+              $(this).dialog('close');
+            }
+          },
+
+        ]
+
+      });
+
+      $('#Review_button').click(function() {
+        $("#Dialog_form").dialog("open");
+      });
+
+    });
+
+
+
+
+    $(function raty() {
+      $.fn.raty.defaults.path = "img/images";
+
+      $('#rateit1').raty({
+        number: 5,
+        score: 0,
+      });
+
+
+      /*
+            $('#btn').click(function() {
+                var score = $('#rateit1').raty('score');
+                var a = "test";
+                var b = $('.sei').val();
+
+                console.log(score);
+                $.ajax({
+                    type: 'POST',
+                    url: './test1.php',
+                    data:{
+                      word1:score,
+                      word2:a
+      		},
+                  success: function (data) {
+                    alert(data);
+            }
+          });
+        });*/
+    });
+
   </script>
 </head>
 
-<body>
+<body　onLoad="swal('SeetAlert2!')">
 
   <nav class="navbar navbar-default">
     <div class="navbar-header">
@@ -457,11 +677,12 @@
 
     <div id="gnavi" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="index.html">top</a></li>
+        <li><a href="search.html">top</a></li>
         <li><a href="login.html">login</a></li>
       </ul>
     </div>
   </nav>
+
 
   <!-- <h1>お店の詳細ページ</h1> -->
   <div class="container">
@@ -471,8 +692,61 @@
       <div class="hot_contents col-xs-12">
 
       </div>
+      <input type="button" value="ルート" class="js--apply btn btn-info" />
     </div>
   </div>
+
+  <button id="Review_button" type="button" name="button">Review</button>
+
+  <div id="Dialog_form">
+
+    <form class="" method="post">
+      <h4 style="display:inline">性別</h4> 男性
+      <input type="radio" class="sei" name="sei" value="0"> 女性
+      <input type="radio" name="sei" value="1">
+      <br>
+      <h4 style="display:inline">年代</h4>
+      <select class="age" name="">
+          <option value="">---</option>
+          <option value="10">10代</option>
+          <option value="20">20代</option>
+          <option value="30">30代</option>
+          <option value="40">40代</option>
+          <option value="50">50代</option>
+          <option value="60">60代~</option>
+        </select><br>
+      <h4 style="display:inline">人数</h4>
+      <select class="h_num" name="">
+          <option value="">---</option>
+          <option value="1">1人</option>
+          <option value="2">2~4人</option>
+          <option value="3">5~10人</option>
+          <option value="4">それ以上</option>
+        </select>
+      <br>
+      <h4 style="display:inline">ボリューム感</h4>
+      <select class="volume" name="">
+          <option value="">---</option>
+          <option value="1">がっつり</option>
+          <option value="2">ふつう</option>
+          <option value="3">少なめ</option>
+        </select>
+      <br>
+      <h4 style="display:inline">お店の雰囲気</h4>
+      <select class="atm" name="" required>
+          <option value="">---</option>
+          <option value="1">静か</option>
+          <option value="2">にぎやか</option>
+          <option value="3">一人で入りやすい</option>
+          <option value="4">女性でも入りやすい</option>
+        </select>
+      <br>
+      <h4 style="display:inline">評価</h4>
+      <div style="display:inline" id="rateit1" required></div>
+      <br>
+    </form>
+  </div>
+
 
 </body>
 
