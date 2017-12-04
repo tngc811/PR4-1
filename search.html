@@ -137,7 +137,8 @@
 
       localStorage.setItem('data', ele.id)　
       var id_value = ele.id;
-      window.location.href = 'shop_contents.html';
+      //window.location.href = 'shop_contents.html';
+      window.open('shop_contents.html');
       /*
       $(function(){
         $.cookie( 'cookie_res' ,cookie_res);
@@ -252,7 +253,7 @@
       function hot() {
         if ($('.gourmet_area').val() != "") {
           const api_key = "10f59688fc27c9e0";
-          var rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + api_key + '&lat=' + lat + '&lng=' + lng + '&range=1&order=4&count=100&format=jsonp';
+          var rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + api_key + '&lat=' + lat + '&lng=' + lng + '&range=5&order=4&count=100&format=jsonp';
           $.ajax({
             type: 'GET',
             url: rep,
@@ -294,7 +295,7 @@
     function genre() {
       if ($('.gourmet_area').val() != "") {
         const api_key = "10f59688fc27c9e0";
-        var rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + api_key + '&lat=' + lat + '&lng=' + lng + '&range=1&genre=' + $('.genre').val() + '&order=4&count=100&format=jsonp';
+        var rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + api_key + '&lat=' + lat + '&lng=' + lng + '&range=5&genre=' + $('.genre').val() + '&order=4&count=100&format=jsonp';
         $.ajax({
           type: 'GET',
           url: rep,

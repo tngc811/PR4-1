@@ -37,85 +37,248 @@
     //*********************HTML生成***************************
 
     function add_res() {　 //HTML生成
+      console.log("SEIKOU");
+
+      res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
+      res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
+
+      if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+        res += '<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+
+      } else {
+        res +='<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+
+      }
+
+      res += '<h4 class="hot_name">住所：' + hot_get.results.shop[0].address + '</h4>';
+
+      res += '<h4 class="hot_name">開店時間：' + hot_get.results.shop[0].open + '</h4>';
+
+      res += '<h4 class="hot_name">閉店時間：' + hot_get.results.shop[0].close + '</h4>';
+
+      res += '<h4 class="hot_name">ランチ：' + hot_get.results.shop[0].lunch + '</h4>';
+
+      res += '<h4 class="hot_name">２３時以降：' + hot_get.results.shop[0].midnight + '</h4>';
+
+      res += '<h4 class="hot_name">パーキン具' + hot_get.results.shop[0].parking + '</h4>';
+
+
+      if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+
+        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.mobile+ '</h4>';
+
+      } else {
+
+        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.pc+ '</h4>';
+
+      }
+
+
+
+    //  res += '<h4 class="hot_name">' + hot_get.results.shop[0].genre.name + ' / <img src="img/yen.png">' + hot_get.results.shop[0].budget.average + '</h4>';
+
+    //  res += '<h4 class="hot_name">' + hot_get.results.shop[0].catch + '</h4>';
+
+  //    res += '<h4>' + g_get.rest.url_mobile + '</h4>';
+
+  //    res += '<h4>' + g_get.rest.coupon_url.mobile + '</h4>';
+
+    //  res += '<img src=' + g_get.rest.image_url.shop_image1 + ' />';
+
+    //  res += '<h4>' + g_get.rest.image_url.shop_image1 + '</h4>';
+
+    //  res += '<h4>' + g_get.rest.pr.pr_short + '</h4>';
+
+
+
+
+      /*
       res　 += 　'<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" ><h4 class="hot_name sname">' +
         hot_get.results.shop[0].name + '</h4><br /><img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">' +
         hot_get.results.shop[0].genre.name + ' / <img src="img/yen.png">' +
         hot_get.results.shop[0].budget.average + '</h4><h4 class="hot_name">' +
         hot_get.results.shop[0].catch + '</h4><h4>' + g_get.rest.url_mobile + '</h4><h4>' + g_get.rest.coupon_url.mobile + '</h4><img src=' + g_get.rest.image_url.shop_image1 + ' /><h4>' +
         g_get.rest.image_url.shop_image1 + '</h4><h4>' + g_get.rest.pr.pr_short + '</h4>';
+*/
 
+/*
       if ("[object Object]" != g_get.rest.budget) {
         res += '<h4>' + g_get.rest.budget + '</h4>';
       } else {
         res += '<h4>データなし</h4>'
       }
+      */
+
+      /*
       if ("[object Object]" != g_get.rest.party) {
         res += '<h4>' + g_get.rest.party + '</h4>';
       } else {
         res += '<h4>データなし</h4>'
       }
+*/
+      /*
       if ("[object Object]" != g_get.rest.lunch) {
         res += '<h4>' + g_get.rest.lunch + '</h4>';
       } else {
         res += '<h4>データなし</h4>'
       }
+      */
+
+
       if ("[object Object]" != g_get.rest.credit_card) {
-        res += '<h4>' + g_get.rest.credit_card + '</h4>';
+        res += '<h4>カード利用：' + g_get.rest.credit_card + '</h4>';
       } else {
-        res += '<h4>データなし</h4>'
+        res += '<h4>カード利用：データなし</h4>'
       }
       if ("[object Object]"　 != 　g_get.rest.e_money) {
-        res += '<h4>' + g_get.rest.e_money + '</h4>';
+        res += '<h4>電子マネー利用：' + g_get.rest.e_money + '</h4>';
       } else {
-        res += '<h4>データなし</h4>'
+        res += '<h4>電子マネー利用：データなし</h4>'
       }
       res += '</div>';
     }
 
     function add_res2() {
-      console.log(r);
+      console.log("成功４５６５４３２４３４");
       cnt = 0;
-      res　 += 　'<div id=' + hot_get.results.shop[cnt].id + ' class="hot_contents" ><h4 class="hot_name">' +
-        hot_get.results.shop[cnt].name + '</h4><img src=' + hot_get.results.shop[cnt].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">' +
-        hot_get.results.shop[cnt].genre.name + ' / </h4><h4 class="hot_name"><img src="img/yen.png">' +
-        hot_get.results.shop[cnt].budget.average + '</h4><h4 class="hot_name">' +
-        hot_get.results.shop[cnt].catch + '</h4><h4>' + g_get.rest[r].url_mobile + '</h4><h4>' + g_get.rest[r].coupon_url.mobile + '</h4><img src=' + g_get.rest[r].image_url.shop_image1 + ' /><h4>' +
-        g_get.rest[r].image_url.shop_image1 + '</h4><h4>' + g_get.rest[r].pr.pr_short + '</h4>';
 
-      if ("[object Object]" != g_get.rest[r].budget) {
-        res += '<h4>' + g_get.rest[r].budget + '</h4>';
+      res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
+      res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
+
+      if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+        res += '<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+
+      } else {
+        res +='<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+
+      }
+
+      res += '<h4 class="hot_name">住所：' + hot_get.results.shop[0].address + '</h4>';
+
+      res += '<h4 class="hot_name">開店時間：' + hot_get.results.shop[0].open + '</h4>';
+
+      res += '<h4 class="hot_name">閉店時間：' + hot_get.results.shop[0].close + '</h4>';
+
+      res += '<h4 class="hot_name">ランチ：' + hot_get.results.shop[0].lunch + '</h4>';
+
+      res += '<h4 class="hot_name">２３時以降：' + hot_get.results.shop[0].midnight + '</h4>';
+
+      res += '<h4 class="hot_name">パーキン具' + hot_get.results.shop[0].parking + '</h4>';
+
+
+
+      if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+
+        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.mobile+ '</h4>';
+
+      } else {
+
+        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.pc+ '</h4>';
+
+      }
+
+
+
+
+    //  res += '<h4 class="hot_name">' + hot_get.results.shop[0].genre.name + ' / <img src="img/yen.png">' + hot_get.results.shop[0].budget.average + '</h4>';
+
+    //  res += '<h4 class="hot_name">' + hot_get.results.shop[0].catch + '</h4>';
+
+  //    res += '<h4>' + g_get.rest.url_mobile + '</h4>';
+
+  //    res += '<h4>' + g_get.rest.coupon_url.mobile + '</h4>';
+
+    //  res += '<img src=' + g_get.rest.image_url.shop_image1 + ' />';
+
+    //  res += '<h4>' + g_get.rest.image_url.shop_image1 + '</h4>';
+
+    //  res += '<h4>' + g_get.rest.pr.pr_short + '</h4>';
+
+
+
+
+      /*
+      res　 += 　'<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" ><h4 class="hot_name sname">' +
+        hot_get.results.shop[0].name + '</h4><br /><img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">' +
+        hot_get.results.shop[0].genre.name + ' / <img src="img/yen.png">' +
+        hot_get.results.shop[0].budget.average + '</h4><h4 class="hot_name">' +
+        hot_get.results.shop[0].catch + '</h4><h4>' + g_get.rest.url_mobile + '</h4><h4>' + g_get.rest.coupon_url.mobile + '</h4><img src=' + g_get.rest.image_url.shop_image1 + ' /><h4>' +
+        g_get.rest.image_url.shop_image1 + '</h4><h4>' + g_get.rest.pr.pr_short + '</h4>';
+*/
+
+/*
+      if ("[object Object]" != g_get.rest.budget) {
+        res += '<h4>' + g_get.rest.budget + '</h4>';
       } else {
         res += '<h4>データなし</h4>'
       }
-      if ("[object Object]" != g_get.rest[r].party) {
-        res += '<h4>' + g_get.rest[r].party + '</h4>';
+      */
+
+      /*
+      if ("[object Object]" != g_get.rest.party) {
+        res += '<h4>' + g_get.rest.party + '</h4>';
       } else {
         res += '<h4>データなし</h4>'
       }
-      if ("[object Object]" != g_get.rest[r].lunch) {
-        res += '<h4>' + g_get.rest[r].lunch + '</h4>';
+*/
+      /*
+      if ("[object Object]" != g_get.rest.lunch) {
+        res += '<h4>' + g_get.rest.lunch + '</h4>';
       } else {
         res += '<h4>データなし</h4>'
       }
-      if ("[object Object]" != g_get.rest[r].credit_card) {
-        res += '<h4>' + g_get.rest[r].credit_card + '</h4>';
+      */
+
+
+      if ("[object Object]" != g_get.rest.credit_card) {
+        res += '<h4>カード利用：' + g_get.rest.credit_card + '</h4>';
       } else {
-        res += '<h4>データなし</h4>'
+        res += '<h4>カード利用：データなし</h4>'
       }
-      if ("[object Object]"　 != 　g_get.rest[r].e_money) {
-        res += '<h4>' + g_get.rest[r].e_money + '</h4>';
+      if ("[object Object]"　 != 　g_get.rest.e_money) {
+        res += '<h4>電子マネー利用：' + g_get.rest.e_money + '</h4>';
       } else {
-        res += '<h4>データなし</h4>'
+        res += '<h4>電子マネー利用：データなし</h4>'
       }
       res += '</div>';
     }
 
     function add_res3() {
-      res　 += 　'<div id=' + hot_get.results.shop[0].id + ' class="hot_contents"><h4 class="hot_name">' +
-        hot_get.results.shop[0].name + '</h4><img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">' +
-        hot_get.results.shop[0].genre.name + ' / </h4><h4 class="hot_name"><img src="img/yen.png">' +
-        hot_get.results.shop[0].budget.average + '</h4><h4 class="hot_name">' +
-        hot_get.results.shop[0].catch + '</h4></div>';
+      res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
+      res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
+
+      if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+        res += '<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+
+      } else {
+        res +='<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+
+      }
+
+      res += '<h4 class="hot_name">住所：' + hot_get.results.shop[0].address + '</h4>';
+
+      res += '<h4 class="hot_name">開店時間：' + hot_get.results.shop[0].open + '</h4>';
+
+      res += '<h4 class="hot_name">閉店時間：' + hot_get.results.shop[0].close + '</h4>';
+
+      res += '<h4 class="hot_name">ランチ：' + hot_get.results.shop[0].lunch + '</h4>';
+
+      res += '<h4 class="hot_name">２３時以降：' + hot_get.results.shop[0].midnight + '</h4>';
+
+      res += '<h4 class="hot_name">パーキン具' + hot_get.results.shop[0].parking + '</h4>';
+
+      if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
+
+        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.mobile+ '</h4>';
+
+      } else {
+
+        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.pc+ '</h4>';
+
+      }
+
+        res += '</div>';
+
     }
 
     //*********************************************************
