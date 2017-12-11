@@ -67,24 +67,24 @@
 
     }
 
-    function load_btn() {　 //次の十件読み込みのfunction
+    function load_btn() {　 //次の9件読み込みのfunction
       res = "";
       //  console.log(leg);
       //  console.log(cnt);
-      if (10 > leg || leg - cnt < 10 || leg == cnt) {　 //次の読み見データが10件以下の場合
+      if (9 > leg || leg - cnt < 9 || leg == cnt) {　 //次の読み見データが9件以下の場合
         last_list();
       } else {
-        for (i = 0; i < 10; i++) {
+        for (i = 0; i < 9; i++) {
           add_res();
         }
         $(".list_btn").remove();
-        cnt += 10;
+        cnt += 9;
         if (cnt == leg) {
           //$('.hot_contents').filter(":last").after(res);
           //  console.log("成功1");
           html_add();
         } else {
-          res += '<input onclick="load_btn()" type="button" class="list_btn" value=" ＞　">';
+          res += '<input onclick="load_btn()" type="button" class="list_btn" value=" さらに表示　">';
           //$('.hot_contents').filter(":last").after(res);
           //  console.log("成功2");
           html_add();
@@ -98,18 +98,18 @@
         //  console.log("0件ですよ～");
         if (leg == 0) {
           res += '<div class="hot_contents"><h1>検索結果0件です</h1></div>';
-        } else if (leg == 10) {
+        } else if (leg == 9) {
 
-          for (i = 0; leg % 10; i++) {
+          for (i = 0; leg % 9; i++) {
             add_res();
           }
         } else {
-          for (i = 0; i < leg % 10; i++) {
+          for (i = 0; i < leg % 9; i++) {
             add_res();
           }
         }
         html_add2();
-      } else if (shop_data.results.shop.length < 11) {
+      } else if (shop_data.results.shop.length < 10) {
         //  console.log(leg);
         //  console.log(shop_data.results.shop.length);
         cnt = 0;
@@ -123,7 +123,7 @@
         html_add2();
       } else { //10以上の場合
         //    console.log(leg);
-        for (i = 0; i < leg % 10; i++) {
+        for (i = 0; i < leg % 9; i++) {
           add_res();
         }
         $(".list_btn").remove();
@@ -161,7 +161,7 @@
           lng = ""; // 経度
           $(".hot_contents").remove();
           $(".list_btn").remove();
-          //  alert("初期っか");
+          //  alert("初期化");
           area_get();
           console.log("初期化");
 
@@ -348,7 +348,7 @@
 
     <div id="gnavi" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="index.html">top</a></li>
+         <li><a href="index.html">みーる</a></li> 　<!-- 後日ロゴ画像に差し替えたい -->
         <li><a href="login.html">login</a></li>
       </ul>
     </div>
@@ -396,7 +396,22 @@
     </div>
   </div>
 
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb3Mm8zzsqCNFTr-_LNNkQMtYKTV000PA&callback=initMap" async defer></script>
-</body>
 
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb3Mm8zzsqCNFTr-_LNNkQMtYKTV000PA&callback=initMap" async defer></script>
+
+  <!-- フッター(クレジット) -->
+  <footer class="footer">
+    Powered by
+      <!-- ぐるなび -->
+        <a href="http://api.gnavi.co.jp/api/scope/" target="_blank">
+          <img src="http://api.gnavi.co.jp/api/img/credit/api_90_35.gif" width="90" height="35" border="0" alt="グルメ情報検索サイト　ぐるなび">
+        </a>
+
+      <!-- ホットペッパー -->
+        <a href="http://webservice.recruit.co.jp/">
+          <img src="http://webservice.recruit.co.jp/banner/hotpepper-m.gif" alt="ホットペッパー Webサービス" width="88" height="35" border="0" title="ホットペッパー Webサービス">
+        </a>
+  </footer>
+</body>
 </html>
