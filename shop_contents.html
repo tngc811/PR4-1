@@ -549,64 +549,83 @@ alert("ルート検索時、位置情報を使用します");
           {
             text: '送信',
             click: function() {
+              $(this).dialog('close');
               /*
               ReviewFormの空白判定
               */
 
-              if ($('.sei').val() != "") {//性別
-                var sei = $('.sei').val();
+              var RData=[];
+
+
+              if (!$('input[name="sei"]:checked').val()) {//性別
+                 //sei = $('input[name="sei"]:checked').val();
+
+                  RData[0] = 3;
               }else {
-                var sei = 3;
+
+                RData[0] =$('input[name="sei"]:checked').val();
               }
               if ($('.age').val() != "") {//年齢
-                var age = $('.age').val();
+                 RData[1] = $('.age').val();
               }else {
-                var age = 0;
+                 RData[1] = 0;
               }
               if ($('.h_num').val()　!=　 "") {
-                var h_num =　$('.h_num').val();
+                 RData[2] =　$('.h_num').val();
               }else {
-                var h_num =　0;
+                 RData[2] =　0;
               }
               if ($('.volume').val()!= "") {
-                var volume =　$('.volume').val();
+                 RData[3] =　$('.volume').val();
               }else {
-                var volume =0;
+                 RData[3] =0;
               }
               if ($('.atm').val()!= "") {
-                var atm =$('.atm').val();
+                 RData[4] =$('.atm').val();
               }else {
-                var atm =0;
+                 RData[4] =0;
               }
               if ($('#rateit1').raty('score')!= "") {
-                var score =$('#rateit1').raty('score');
+                 RData[5] =$('#rateit1').raty('score');
               }else {
-                var score =0;
+                 RData[5] =0;
               }
+              RData[6] = hot_shop_id;
 
-              var b = $('.sei').val();
+            //  var b = $('.sei').val();
+
             //  var score = $('#rateit1').raty('score');
+
 
               $.ajax({
                 type: 'POST',
-                url: './test1.php',
+                url: 'Review.php',
                 data: {
+                  /*
                   sei: sei,
                   age: age,
                   h_num: h_num,
                   volume: volume,
                   atm: atm,
+                  hot_shop_id: hot_shop_id,
                   score: score
+                  */
+                  /*
+                  hot_shop_id: hot_shop_id,
+                  atm: atm,
+                  sei: sei,
+                  score: score,
+                  */
+                  RData:RData,
                 },
                 success: function(data) {
-                  console.log("送信成功");
+
+
                   console.log(data);
 
                 }
               });
               alert("ボタン1をクリックしました");
-              console.log(b);
-              console.log(score);
             }
           },
           {
@@ -701,19 +720,20 @@ alert("ルート検索時、位置情報を使用します");
   <div id="Dialog_form">
 
     <form class="" method="post">
-      <h4 style="display:inline">性別</h4> 男性
-      <input type="radio" class="sei" name="sei" value="0"> 女性
-      <input type="radio" name="sei" value="1">
+      <h4 style="display:inline">性別</h4>
+      男性
+      <input type="radio" class="sei" name="sei" value="1"> 女性
+      <input type="radio" class="sei" name="sei" value="2">
       <br>
       <h4 style="display:inline">年代</h4>
       <select class="age" name="">
           <option value="">---</option>
-          <option value="10">10代</option>
-          <option value="20">20代</option>
-          <option value="30">30代</option>
-          <option value="40">40代</option>
-          <option value="50">50代</option>
-          <option value="60">60代~</option>
+          <option value="1">10代</option>
+          <option value="2">20代</option>
+          <option value="3">30代</option>
+          <option value="4">40代</option>
+          <option value="5">50代</option>
+          <option value="6">60代~</option>
         </select><br>
       <h4 style="display:inline">人数</h4>
       <select class="h_num" name="">
