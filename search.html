@@ -35,7 +35,7 @@
       maximumAge: 0
     }
     var i = 0; // for文用変数
-    //----------------------------------
+    var range = 0; //検索範囲
 /*
     $(function(){
       $.cookie("a","値");
@@ -50,12 +50,12 @@
         res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents sinfo" onclick="set_shop_id(this);"><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].genre.name+' / <img src="img/yen.png">'
-      +shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+      +shop_data.results.shop[cnt+i].budget.average+'</h4><h4>【最寄駅】'+shop_data.results.shop[cnt+i].station_name+'駅</h4></div>';
 
       cookie_res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents sinfo" onclick="set_shop_id(this);"><h4 class="hot_name">'
     +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
     +shop_data.results.shop[cnt+i].genre.name+' / <img src="img/yen.png">'
-    +shop_data.results.shop[cnt+i].budget.average+'</h4></div>';
+    +shop_data.results.shop[cnt+i].budget.average+'</h4><h4>【最寄駅】'+shop_data.results.shop[cnt+i].station_name+'駅</h4></div>';
     }
 
     function html_add() {
@@ -252,8 +252,17 @@
       //ホットペッパーデータ取得
       function hot() {
         if ($('.gourmet_area').val() != "") {
+          if ($('.range').val() == "0") {
+            //console.log("範囲１");
+            console.log($('.range').val());
+            range = 3;
+          }else {
+            //console.log("範囲２");
+            console.log($('.range').val());
+            range = $('.range').val();
+          }
           const api_key = "10f59688fc27c9e0";
-          var rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + api_key + '&lat=' + lat + '&lng=' + lng + '&range=5&order=4&count=100&format=jsonp';
+          var rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + api_key + '&lat=' + lat + '&lng=' + lng + '&range='+range+'&order=4&count=100&format=jsonp';
           $.ajax({
             type: 'GET',
             url: rep,
@@ -294,8 +303,15 @@
 
     function genre() {
       if ($('.gourmet_area').val() != "") {
+        if ($('.range').val() == "0") {
+          console.log("範囲１");
+          console.log($('.range').val());
+        }else {
+          console.log("範囲２");
+          console.log($('.range').val());
+        }
         const api_key = "10f59688fc27c9e0";
-        var rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + api_key + '&lat=' + lat + '&lng=' + lng + '&range=5&genre=' + $('.genre').val() + '&order=4&count=100&format=jsonp';
+        var rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + api_key + '&lat=' + lat + '&lng=' + lng + '&range='+range+'&genre=' + $('.genre').val() + '&order=4&count=100&format=jsonp';
         $.ajax({
           type: 'GET',
           url: rep,
@@ -360,7 +376,7 @@
       <div class="form">
         <input type="search" placeholder="エリアを入力してね" autofocus="on" list="data1" class="gourmet_area form-control " name="login_name" />
           <select class="form-control genre" name="">
-            <option value="G000">---ジャンルを選択---</option>
+            <option value="G000">---範囲の指定---</option>
             <option value="G001">居酒屋</option>
             <option value="G002">ダイニングバー</option>
             <option value="G003">創作料理</option>
@@ -377,6 +393,14 @@
             <option value="G014">お好み焼き・もんじゃ・鉄板焼き</option>
             <option value="G015">カフェ・スイーツ</option>
             <option value="G016">その他グルメ</option>
+          </select>
+          <select class="form-control range" name="">
+            <option value="0">---ジャンルを選択---</option>
+            <option value="1">300m</option>
+            <option value="2">500m</option>
+            <option value="3">1000m</option>
+            <option value="4">2000m</option>
+            <option value="5">3000m</option>
           </select>
         <input class="gourmet_btn" type="button" value="検索">
       </div>
