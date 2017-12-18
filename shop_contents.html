@@ -80,38 +80,40 @@ alert("ルート検索時、位置情報を使用します");
       console.log(hot_get.results.shop[0].lat);
 
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
-      res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
+      res += '<h4 class="hot_name sname">店舗名</h4>' + hot_get.results.shop[0].name + '<br />';
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
-        res += '<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+        res += '<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" /><br />';
 
       } else {
-        res +='<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+        res +='<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" /><br />';
 
       }
 
-      res += '<h4 class="hot_name">住所：' + hot_get.results.shop[0].address + '</h4>';
-
-      res += '<h4 class="hot_name">開店時間：' + hot_get.results.shop[0].open + '</h4>';
-
-      res += '<h4 class="hot_name">閉店時間：' + hot_get.results.shop[0].close + '</h4>';
-
-      res += '<h4 class="hot_name">ランチ：' + hot_get.results.shop[0].lunch + '</h4>';
-
-      res += '<h4 class="hot_name">２３時以降：' + hot_get.results.shop[0].midnight + '</h4>';
-
-      res += '<h4 class="hot_name">パーキン具' + hot_get.results.shop[0].parking + '</h4>';
-
+      res += '<table class="table table-bordered"><tbody><tr>'
+      res += '<th class="warning">住所</th><th>' + hot_get.results.shop[0].address + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">開店時間</th><th>' + hot_get.results.shop[0].open + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">閉店時間</th><th>' + hot_get.results.shop[0].close + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">ランチ</th><th>' + hot_get.results.shop[0].lunch + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">２３時以降</th><th>' + hot_get.results.shop[0].midnight + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">パーキング</th><th>' + hot_get.results.shop[0].parking + '</th>';
+      res += '</tr><tr>'
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
 
-        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.mobile+ '</h4>';
+        res += '<th class="warning">URL</th> <th>' + hot_get.results.shop[0].urls.mobile+ '</th>';
 
       } else {
 
-        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.pc+ '</h4>';
+        res += '<th class="warning">URL</th><th>' + hot_get.results.shop[0].urls.pc+ '</th>';
 
       }
+      res += '</tr><tr>'
 
 
 
@@ -164,17 +166,19 @@ alert("ルート検索時、位置情報を使用します");
       }
       */
 
-
+      res += '</tr><tr>'
       if ("[object Object]" != g_get.rest.credit_card) {
-        res += '<h4>カード利用：' + g_get.rest.credit_card + '</h4>';
+        res += '<th class="warning">カード利用</th><th>' + g_get.rest.credit_card + '</th>';
       } else {
-        res += '<h4>カード利用：データなし</h4>'
+        res += '<th class="warning">カード利用</th><th>データなし</th>'
       }
+      res += '</tr><tr>'
       if ("[object Object]"　 != 　g_get.rest.e_money) {
-        res += '<h4>電子マネー利用：' + g_get.rest.e_money + '</h4>';
+        res += '<th class="warning">電子マネー利用</th><th>' + g_get.rest.e_money + '</th>';
       } else {
-        res += '<h4>電子マネー利用：データなし</h4>'
+        res += '<th class="warning">電子マネー利用</th><th>データなし</th>'
       }
+      res += '</tr></tbody></table>'
       res += '</div>';
     }
 
@@ -197,27 +201,29 @@ alert("ルート検索時、位置情報を使用します");
 
       }
 
-      res += '<h4 class="hot_name">住所：' + hot_get.results.shop[0].address + '</h4>';
 
-      res += '<h4 class="hot_name">開店時間：' + hot_get.results.shop[0].open + '</h4>';
-
-      res += '<h4 class="hot_name">閉店時間：' + hot_get.results.shop[0].close + '</h4>';
-
-      res += '<h4 class="hot_name">ランチ：' + hot_get.results.shop[0].lunch + '</h4>';
-
-      res += '<h4 class="hot_name">２３時以降：' + hot_get.results.shop[0].midnight + '</h4>';
-
-      res += '<h4 class="hot_name">パーキン具' + hot_get.results.shop[0].parking + '</h4>';
-
+      res += '<table class="table table-bordered"><tbody><tr>'
+      res += '<th class="warning">住所</th><th>' + hot_get.results.shop[0].address + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">開店時間</th><th>' + hot_get.results.shop[0].open + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">閉店時間</th><th>' + hot_get.results.shop[0].close + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">ランチ</th><th>' + hot_get.results.shop[0].lunch + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">２３時以降</th><th>' + hot_get.results.shop[0].midnight + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">パーキング</th><th>' + hot_get.results.shop[0].parking + '</th>';
+      res += '</tr><tr>'
 
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
 
-        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.mobile+ '</h4>';
+        res += '<th class="warning">URL</th><th>' + hot_get.results.shop[0].urls.mobile+ '</th>';
 
       } else {
 
-        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.pc+ '</h4>';
+        res += '<th class="warning">URL</th><th>' + hot_get.results.shop[0].urls.pc+ '</th>';
 
       }
 
@@ -273,17 +279,18 @@ alert("ルート検索時、位置情報を使用します");
       }
       */
 
-
+      res += '</tr><tr>'
       if ("[object Object]" != g_get.rest.credit_card) {
-        res += '<h4>カード利用：' + g_get.rest.credit_card + '</h4>';
+        res += '<th class="warning">カード利用</th><th>' + g_get.rest.credit_card + '</th>';
       } else {
-        res += '<h4>カード利用：データなし</h4>'
+        res += '<th class="warning">カード利用</th><th>データなし</th>'
       }
       if ("[object Object]"　 != 　g_get.rest.e_money) {
-        res += '<h4>電子マネー利用：' + g_get.rest.e_money + '</h4>';
+        res += '<th class="warning">電子マネー利用</th><th>' + g_get.rest.e_money + '</th>';
       } else {
-        res += '<h4>電子マネー利用：データなし</h4>'
+        res += '<th class="warning">電子マネー利用</th><th>データなし</th>'
       }
+      res += '</tr></tbody></table>'
       res += '</div>';
     }
 
@@ -303,29 +310,30 @@ alert("ルート検索時、位置情報を使用します");
 
       }
 
-      res += '<h4 class="hot_name">住所：' + hot_get.results.shop[0].address + '</h4>';
-
-      res += '<h4 class="hot_name">開店時間：' + hot_get.results.shop[0].open + '</h4>';
-
-      res += '<h4 class="hot_name">閉店時間：' + hot_get.results.shop[0].close + '</h4>';
-
-      res += '<h4 class="hot_name">ランチ：' + hot_get.results.shop[0].lunch + '</h4>';
-
-      res += '<h4 class="hot_name">２３時以降：' + hot_get.results.shop[0].midnight + '</h4>';
-
-      res += '<h4 class="hot_name">パーキン具' + hot_get.results.shop[0].parking + '</h4>';
-
+      res += '<table class="table table-bordered"><tbody><tr>'
+      res += '<th class="warning">住所</th><th>' + hot_get.results.shop[0].address + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">開店時間</th><th>' + hot_get.results.shop[0].open + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">閉店時間</th><th>' + hot_get.results.shop[0].close + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">ランチ</th><th>' + hot_get.results.shop[0].lunch + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">２３時以降</th><th>' + hot_get.results.shop[0].midnight + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">パーキング</th><th>' + hot_get.results.shop[0].parking + '</th>';
+      res += '</tr><tr>'
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
 
-        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.mobile+ '</h4>';
+        res += '<th class="warning">URL</th><th>' + hot_get.results.shop[0].urls.mobile+ '</th>';
 
       } else {
 
-        res += '<h4 class="hot_name">URL:' + hot_get.results.shop[0].urls.pc+ '</h4>';
+        res += '<th class="warning">URL</th><th>' + hot_get.results.shop[0].urls.pc+ '</th>';
 
       }
-
-        res += '</div>';
+      res += '</tr></tbody></table>'
+      res += '</div>';
 
     }
 
@@ -696,7 +704,7 @@ alert("ルート検索時、位置情報を使用します");
 
     <div id="gnavi" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="search.html">top</a></li>
+        <li><a href="search.html">みーる</a></li>
         <li><a href="login.html">login</a></li>
       </ul>
     </div>
@@ -711,62 +719,78 @@ alert("ルート検索時、位置情報を使用します");
       <div class="hot_contents col-xs-12">
 
       </div>
-      <input type="button" value="ルート" class="js--apply btn btn-info" />
+      <!-- ルート検索ボタン -->
+      <input type="button" value="ルート" class="js--apply route_btn" />
+      <!-- レビュー -->
+      <button id="Review_button" type="button" name="button" class="route_btn">レビュー</button>
+
+      <div id="Dialog_form">
+
+        <form class="" method="post">
+          <h4 style="display:inline">性別</h4>
+          男性
+          <input type="radio" class="sei" name="sei" value="1"> 女性
+          <input type="radio" class="sei" name="sei" value="2">
+          <br>
+          <h4 style="display:inline">年代</h4>
+          <select class="age" name="">
+              <option value="">---</option>
+              <option value="1">10代</option>
+              <option value="2">20代</option>
+              <option value="3">30代</option>
+              <option value="4">40代</option>
+              <option value="5">50代</option>
+              <option value="6">60代~</option>
+            </select><br>
+          <h4 style="display:inline">人数</h4>
+          <select class="h_num" name="">
+              <option value="">---</option>
+              <option value="1">1人</option>
+              <option value="2">2~4人</option>
+              <option value="3">5~10人</option>
+              <option value="4">それ以上</option>
+            </select>
+          <br>
+          <h4 style="display:inline">ボリューム感</h4>
+          <select class="volume" name="">
+              <option value="">---</option>
+              <option value="1">がっつり</option>
+              <option value="2">ふつう</option>
+              <option value="3">少なめ</option>
+            </select>
+          <br>
+          <h4 style="display:inline">お店の雰囲気</h4>
+          <select class="atm" name="" required>
+              <option value="">---</option>
+              <option value="1">静か</option>
+              <option value="2">にぎやか</option>
+              <option value="3">一人で入りやすい</option>
+              <option value="4">女性でも入りやすい</option>
+            </select>
+          <br>
+          <h4 style="display:inline">評価</h4>
+          <div style="display:inline" id="rateit1" required></div>
+          <br>
+        </form>
+      </div>
     </div>
   </div>
 
-  <button id="Review_button" type="button" name="button">Review</button>
 
-  <div id="Dialog_form">
 
-    <form class="" method="post">
-      <h4 style="display:inline">性別</h4>
-      男性
-      <input type="radio" class="sei" name="sei" value="1"> 女性
-      <input type="radio" class="sei" name="sei" value="2">
-      <br>
-      <h4 style="display:inline">年代</h4>
-      <select class="age" name="">
-          <option value="">---</option>
-          <option value="1">10代</option>
-          <option value="2">20代</option>
-          <option value="3">30代</option>
-          <option value="4">40代</option>
-          <option value="5">50代</option>
-          <option value="6">60代~</option>
-        </select><br>
-      <h4 style="display:inline">人数</h4>
-      <select class="h_num" name="">
-          <option value="">---</option>
-          <option value="1">1人</option>
-          <option value="2">2~4人</option>
-          <option value="3">5~10人</option>
-          <option value="4">それ以上</option>
-        </select>
-      <br>
-      <h4 style="display:inline">ボリューム感</h4>
-      <select class="volume" name="">
-          <option value="">---</option>
-          <option value="1">がっつり</option>
-          <option value="2">ふつう</option>
-          <option value="3">少なめ</option>
-        </select>
-      <br>
-      <h4 style="display:inline">お店の雰囲気</h4>
-      <select class="atm" name="" required>
-          <option value="">---</option>
-          <option value="1">静か</option>
-          <option value="2">にぎやか</option>
-          <option value="3">一人で入りやすい</option>
-          <option value="4">女性でも入りやすい</option>
-        </select>
-      <br>
-      <h4 style="display:inline">評価</h4>
-      <div style="display:inline" id="rateit1" required></div>
-      <br>
-    </form>
-  </div>
+  <!-- フッター(クレジット) -->
+  <footer class="footer">
+    Powered by
+      <!-- ぐるなび -->
+        <a href="http://api.gnavi.co.jp/api/scope/" target="_blank">
+          <img src="http://api.gnavi.co.jp/api/img/credit/api_90_35.gif" width="90" height="35" border="0" alt="グルメ情報検索サイト　ぐるなび">
+        </a>
 
+      <!-- ホットペッパー -->
+        <a href="http://webservice.recruit.co.jp/">
+          <img src="http://webservice.recruit.co.jp/banner/hotpepper-m.gif" alt="ホットペッパー Webサービス" width="88" height="35" border="0" title="ホットペッパー Webサービス">
+        </a>
+  </footer>
 
 </body>
 

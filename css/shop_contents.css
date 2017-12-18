@@ -3,6 +3,8 @@ height: 100%;
 }
 
 body{
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
@@ -32,4 +34,22 @@ a:active { color:#0000ff; text-decoration:none }
 
 .scon{
   margin-left: 10px;
+}
+
+.route_btn{
+  color:#FFF;
+  background-color:#ff8181;
+  padding:5px;
+  width: 200px;
+}
+
+/* フッター */
+.container{
+  flex: 1 0 auto;
+  padding: 20px;
+}
+.footer{
+  text-align: center;
+  flex-shrink: 0;
+  padding: 20px;
 }
