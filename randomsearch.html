@@ -16,6 +16,7 @@
   <!-- ratyのJS読み込み -->
   <script src="js/jquery.raty.js" type="text/javascript"></script>
   <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+
   <script>
     //--------------変数宣言--------------
     var res　 = ""; //HTMLタグ変数
@@ -36,6 +37,13 @@
     var i; //for文用
     var r; //フラグ変数
     var s_range;//検索範囲
+    var s_age;  //年代
+    var s_num;  //人数
+    var s_vol;  //食事量
+    var s_atm;  //雰囲気
+    var s_eva;  //評価
+    var s_id =[];
+    var random;//ランダム
     //緯度経度
     var shoplat ;
     var shoplng ;
@@ -334,47 +342,115 @@ alert("ルート検索時に位置情報を使用します。");
         lng = argPos.coords.longitude;         // 経度
 
         console.log(lat+" "+lng);
-        //選択されている検索範囲を取得
+        //選択されている条件の取得 指定なしの場合検索から外す
         if($('[name="range"]').val() == 0){
           s_range = 3;
         }else{
           s_range = $('[name="range"]').val();
         }
-        console.log($('[name="range"]').val());
+        //年代
+        s_age = $('[name="age"]').val();
+        //人数
+        s_num = $('[name="num"]').val();
+        //食事量
+        s_vol = $('[name="volume"]').val();
+        //雰囲気
+        s_atm = $('[name="atm"]').val();
+        //評価
+        s_eva = $('[name="eva"]').val();
 
+        console.log(s_range);
+        console.log(s_age);
+        console.log(s_num);
+        console.log(s_vol);
+        console.log(s_atm);
+        console.log(s_eva);
+
+
+
+        //取得した範囲の中で条件に合うお店を検索する
         var hot_rep =  'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key='+hot_api_key+'&lat='+lat+'&lng='+lng+'&range='+s_range+'&order=4&count=100&format=jsonp';
           $.ajax({
             type: 'GET',
             url: hot_rep,
             dataType: 'jsonp',
             success: function(data) {
-              console.log("aaaaaa");
+              console.log("取得したデータ");
               console.log(data);
               console.log(data.results.shop.length);
-              //予算が一番低い店
-                flag = $('[name="type"]').val();
+              console.log(data.results.shop);
+              //idを取得
+              for(i=0; i<data.results.shop.length;i++){
+                s_id[i] = data.results.shop[i].id;
+              }
+              //条件が指定されている場合
+                if(s_age == 0 && s_num == 0　&& s_vol == 0　&& s_atm == 0　&& s_eva == 0){
+                  //条件指定していない場合ランダム検索を実施
+                  //ヒット数の中から１件抽出
+                  //ヒット数内でランダム値生成
+                  random = Math.floor( Math.random() * data.results.shop.length );
+                  hot_shop_id = data.results.shop[random].id;
 
+                  hot_rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + hot_api_key + '&id=' + hot_shop_id + '&range=1&order=4&count=100&format=jsonp';
+                  $.ajax({
+                    type: 'GET',
+                    url: hot_rep,
+                    dataType: 'jsonp',
+                    success: function(randomdata) {
+                      console.log(randomdata);
+                      hot_get = randomdata;
+                      gurunabi();　 //ぐるなびデータ取得関数
+                    }
+                  });
+                }else{
+                  //条件がある場合search.phpに飛ぶ
+                  $.ajax({
+                    type: 'POST',
+                    //変えてね！
+                    url: 'http://localhost/search.php',
+                    dataType: 'text',
+                    data: {
+                      "age" : s_age,
+                      "num" : s_num,
+                      "vol" : s_vol,
+                      "atm" : s_atm,
+                      "eva" : s_eva,
+                      "data" : s_id
+                    },
+                    success: function(s_data) {
+                      console.log(s_data);
+                      s_data = JSON.parse(s_data);
+                      if(s_data.length > 0){
+                        random = Math.floor( Math.random() * s_data.length );
+                        hot_shop_id = s_data[random];
 
+                        hot_rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + hot_api_key + '&id=' + hot_shop_id + '&range=1&order=4&count=100&format=jsonp';
+                        $.ajax({
+                          type: 'GET',
+                          url: hot_rep,
+                          dataType: 'jsonp',
+                          success: function(randomdata) {
+                            console.log(randomdata);
+                            hot_get = randomdata;
+                            gurunabi();　 //ぐるなびデータ取得関数
+                          }
+                        });
+                      }else{
+                        alert("検索結果が見つかりませんでした");
+                      }
 
-
-
-
-              //ヒット数の中から１件抽出
-              //ヒット数内でランダム値生成
-              var random = Math.floor( Math.random() * data.results.shop.length );
-              hot_shop_id = data.results.shop[random].id;
-
-              hot_rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + hot_api_key + '&id=' + hot_shop_id + '&range=1&order=4&count=100&format=jsonp';
-              $.ajax({
-                type: 'GET',
-                url: hot_rep,
-                dataType: 'jsonp',
-                success: function(data) {
-                  console.log(data);
-                  hot_get = data;
-                  gurunabi();　 //ぐるなびデータ取得関数
+              //        hot_get = data;
+              //        gurunabi();　 //ぐるなびデータ取得関数
+                    }
+                  });
                 }
-              });
+
+
+
+
+
+
+
 
               $('#route').show();
               $('#Review_button').show();
@@ -513,22 +589,54 @@ alert("ルート検索時に位置情報を使用します。");
         <div class="form-group center-block">
           <div class="form">
               <select class="form-control genre" name="range">
-                <option value="0">検索範囲の指定</option>
+                <option value="0">検索範囲</option>
                 <option value="1">300m</option>
                 <option value="2">500m</option>
                 <option value="3">1000m</option>
                 <option value="4">2000m</option>
                 <option value="5">3000m</option>
               </select>
-              <select class="form-control genre" name="type">
-                <option value="0">お任せ検索</option>
-                <option value="1">低予算検索</option>
-                <option value="2">なにか</option>
-                <option value="3">しらの</option>
-                <option value="4">条件</option>
+              <select class="form-control genre" name="age">
+                <option value="0">年代別</option>
+                <option value="1">10代が多く評価</option>
+                <option value="2">20代が多く評価</option>
+                <option value="3">30代が多く評価</option>
+                <option value="4">40代が多く評価</option>
+                <option value="4">50代が多く評価</option>
+                <option value="4">60代が多く評価</option>
               </select>
+              <select class="form-control genre" name="num">
+                <option value="0">人数別</option>
+                <option value="1">1人</option>
+                <option value="2">2人から4人</option>
+                <option value="3">5人から10人</option>
+                <option value="4">それ以上</option>
+              </select>
+              <select class="form-control genre" name="volume">
+                <option value="0">食事量</option>
+                <option value="1">がっつり</option>
+                <option value="2">普通</option>
+                <option value="3">すくなめ</option>
+              </select>
+              <select class="form-control genre" name="atm">
+                <option value="0">雰囲気</option>
+                <option value="1">静か</option>
+                <option value="2">にぎやか</option>
+                <option value="3">一人でも入りやすい</option>
+                <option value="4">女性でも入りやすい</option>
+              </select>
+                <select class="form-control genre" name="eva">
+                  <option value="0">評価</option>
+                  <option value="5">5以上</option>
+                  <option value="4">4以上</option>
+                  <option value="3">3以上</option>
+                  <option value="2">2以上</option>
+                  <option value="1">1以上</option>
+                </select>
               <input type="button" id="search" value="検索" class="js--apply btn btn-info"></input>
           </div>
+          ※条件が少ない程ヒットします。
+            ヒットしない場合ランダムに1件表示します
         </div>
       </form>
 
