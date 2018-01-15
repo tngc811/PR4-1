@@ -1,7 +1,8 @@
 <?php
-//認証キー変更しなくてよい
-define('APP_ID', '352757345171404');
-define('APP_SECRET', '370f4df37193e27706956004277edcfa');
+session_start();
+
+define('APP_ID', '603088119870390');
+define('APP_SECRET', 'eb8b7fe9febc97dbebbb9e87346e9b73');
 
 $code = $_REQUEST['code'];
 
@@ -17,8 +18,16 @@ $user_json = file_get_contents('https://graph.facebook.com/me?' . $access_token)
 $user = json_decode($user_json);
 
 // facebook の user_id + name(表示名)をセット
-$user_id = $user->id;
-$name    = $user->name;
+//$user_id = $user->id;
+//$name    = $user->name;
 
-header('location:aaaaaaaa');
+$_SESSION['UserID'] = $user->id;
+
+
+// 初回ユーザかチェックするロジック
+exit();
+if(){
+
+    // 初回ユーザならDatabaseへの登録処理・・・などなど
+
 }
