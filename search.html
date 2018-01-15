@@ -46,6 +46,30 @@
     function initMap() {}
 
 
+    $(function(){
+      if (window.sessionStorage.getItem(['UserID']) == null) {
+        $('.nav').append('<li class="login-Label"><a href="login.html">login</a></li>');
+        console.log(window.sessionStorage.getItem(['UserID']));
+        //$('.nav').filter(":last").after('<li><a href="login.html">login</a></li>');
+        console.log("login");
+      }else {
+        //$('.nav').filter(":last").after('<li><a href="login.html">logout</a></li>');
+        $('.nav').append('<li class="login-Label"><a href=login.html>logout</a></li>');
+        console.log(window.sessionStorage.getItem(['UserID']));
+        console.log("logout");
+        logout();
+      }
+});
+
+function logout(){
+  $(".login-Label").remove();
+  window.sessionStorage.setItem(['UserID'],[null]);
+  $('.nav').append('<li class="login-Label"><a href="login.html">logout</a></li>');
+  console.log(window.sessionStorage.getItem(['UserID']));
+}
+
+
+
     function add_res() {　//HTML生成
         res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents sinfo" onclick="set_shop_id(this);"><h4 class="hot_name">'
       +shop_data.results.shop[cnt+i].name+'</h4><img src='+shop_data.results.shop[cnt+i].photo.mobile.l+' class="img-rounded" alt="" width="" height="" border="0" /><h4 class="hot_name">'
@@ -390,7 +414,7 @@
     <div id="gnavi" class="collapse navbar-collapse" style="background-color:rgb(240, 240, 240);">
       <ul class="nav label navbar-nav">
          <li><a href="index.html">みーる</a></li> 　<!-- 後日ロゴ画像に差し替えたい -->
-        <li><a href="login.html">login</a></li>
+        <!--<li><a href="login.html">login</a></li>-->
       </ul>
     </div>
   </nav>
