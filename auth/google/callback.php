@@ -1,6 +1,6 @@
 <?php
 //ユーザ名を保持するためにセッションを利用
-session_start();
+//session_start();
 // アプリケーション設定
 define('CONSUMER_KEY', '580811002788-3as05vpski0tqibi9v96skii4r4n6udn.apps.googleusercontent.com');
 define('CONSUMER_SECRET', 'fUJ5BdVqKZxR6guKpDnbh_GR');
@@ -42,7 +42,15 @@ $res = file_get_contents(INFO_URL . '?' . http_build_query($params));
 //取得したユーザデータからユーザ名を取得する。
 $UserData= json_decode($res,true);
 
-$_SESSION['UserID'] =$UserData['id'];
+//$_SESSION['UserID'] =$UserData['id'];
+//echo "<script type='text/javascript'> windows.sessionStorage.setItem(['UserID'],['".$UserData['id']."']);</script>";
+echo "
+		<script type='text/javascript'>
+		console.log('test');
+			windows.sessionStorage.setItem(['UserID'],['a']);
+			console.log(windows.sessionStorage.getItem['UserID']);
+		</script>
+";
 
 //urlにリダイレクト(レビューページに飛ばせばいいと思う)
 header('location:../../PR4/login.html');

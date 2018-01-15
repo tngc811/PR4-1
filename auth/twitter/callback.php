@@ -58,8 +58,12 @@ $res = file_get_contents(INFO_URL . '?' . http_build_query($params));
 
 
 //sessionにユーザidを保存
-$_SESSION['UserID'] = $user_id;
-echo $_SESSION['UserID'];
+//$_SESSION['UserID'] = $user_id;
+//echo $_SESSION['UserID'];
+
+//echo "<script type='text/javascript'> windows.sessionStorage.setItem(['UserID'],['".$user_id."']);</script>";
+echo "<script type='text/javascript'> windows.sessionStorage.setItem(['UserID'],['a']);</script>";
+
 
 
 //↓リダイレクト処理、(レビューページに飛ばせばいいと思う)

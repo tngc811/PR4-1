@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 
 define('APP_ID', '603088119870390');
 define('APP_SECRET', 'eb8b7fe9febc97dbebbb9e87346e9b73');
@@ -21,7 +21,9 @@ $user = json_decode($user_json);
 //$user_id = $user->id;
 //$name    = $user->name;
 
-$_SESSION['UserID'] = $user->id;
+//$_SESSION['UserID'] = $user->id;
+//echo "<script type='text/javascript'> windows.sessionStorage.setItem(['UserID'],['".$user->id."']);</script>";
+echo "<script type='text/javascript'> windows.sessionStorage.setItem(['UserID'],['a']);</script>";
 
 
 // 初回ユーザかチェックするロジック

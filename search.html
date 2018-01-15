@@ -45,30 +45,29 @@
 */
     function initMap() {}
 
-
     $(function(){
-      if (window.sessionStorage.getItem(['UserID']) == null) {
-        $('.nav').append('<li class="login-Label"><a href="login.html">login</a></li>');
-        console.log(window.sessionStorage.getItem(['UserID']));
-        //$('.nav').filter(":last").after('<li><a href="login.html">login</a></li>');
-        console.log("login");
-      }else {
-        //$('.nav').filter(":last").after('<li><a href="login.html">logout</a></li>');
-        $('.nav').append('<li class="login-Label"><a href=login.html>logout</a></li>');
-        console.log(window.sessionStorage.getItem(['UserID']));
-        console.log("logout");
-        logout();
-      }
+  console.log("logintest");
+  if (window.sessionStorage.getItem(['UserID']) == null) {
+    $('.nav').append('<li class="login-Label"><a href="login.html">login</a></li>');
+    console.log(window.sessionStorage.getItem(['UserID']));
+    //$('.nav').filter(":last").after('<li><a href="login.html">login</a></li>');
+    console.log("login");
+  }else {
+  //  $(".login-Label").remove();
+    //$('.nav').filter(":last").after('<li><a href="login.html">logout</a></li>');
+    $('.nav').append('<li class="login-Label"><a href=login.html>logout</a></li>');
+    console.log(window.sessionStorage.getItem(['UserID']));
+    console.log("logout");
+    logout();
+  }
 });
 
 function logout(){
-  $(".login-Label").remove();
-  window.sessionStorage.setItem(['UserID'],[null]);
-  $('.nav').append('<li class="login-Label"><a href="login.html">logout</a></li>');
-  console.log(window.sessionStorage.getItem(['UserID']));
+$(".login-Label").remove();
+window.sessionStorage.setItem(['UserID'],[null]);
+$('.nav').append('<li class="login-Label"><a href="login.html">logout</a></li>');
+console.log(window.sessionStorage.getItem(['UserID']));
 }
-
-
 
     function add_res() {　//HTML生成
         res　+=　'<div id='+shop_data.results.shop[cnt+i].id+' class="hot_contents sinfo" onclick="set_shop_id(this);"><h4 class="hot_name">'
@@ -397,7 +396,6 @@ function logout(){
       }
       $(".gourmet_btn").prop('disabled', false);
     }
-
 
   </script>
 
