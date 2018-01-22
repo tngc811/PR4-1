@@ -58,17 +58,17 @@
     $(function(){
       console.log("logintest");
       if (window.sessionStorage.getItem(['UserID']) == null) {
-        $('.nav').append('<li class="login-Label"><a href="login.html">login</a></li>');
+  //      $('.nav').append('<li class="login-Label"><a href="login.html">login</a></li>');
         console.log(window.sessionStorage.getItem(['UserID']));
         //$('.nav').filter(":last").after('<li><a href="login.html">login</a></li>');
         console.log("login");
       }else {
       //  $(".login-Label").remove();
         //$('.nav').filter(":last").after('<li><a href="login.html">logout</a></li>');
-        $('.nav').append('<li class="login-Label"><a href=login.html>logout</a></li>');
+      //  $('.nav').append('<li class="login-Label"><a href=login.html>logout</a></li>');
         console.log(window.sessionStorage.getItem(['UserID']));
         console.log("logout");
-        logout();
+      //  logout();
       }
 });
 /*

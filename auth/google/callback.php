@@ -5,7 +5,7 @@
 define('CONSUMER_KEY', '580811002788-3as05vpski0tqibi9v96skii4r4n6udn.apps.googleusercontent.com');
 define('CONSUMER_SECRET', 'fUJ5BdVqKZxR6guKpDnbh_GR');
 //サーバにあるgoogle用のcallback.phpのURLを設定(今はローカル)
-define('CALLBACK_URL', 'https://pr4.wjg.jp/PR4/test/auth/google/callback.php');
+define('CALLBACK_URL', '../auth/google/callback.php');
 // URL
 define('TOKEN_URL', 'https://accounts.google.com/o/oauth2/token');
 define('INFO_URL', 'https://www.googleapis.com/oauth2/v1/userinfo');

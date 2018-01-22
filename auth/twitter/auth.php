@@ -5,7 +5,7 @@ require('util.php');
 //↓実際に使うサーバ側でまた変更する必要がある。
 define('CONSUMER_KEY', 'vGlvQhfPt0n0DWSkFGEndjZUp');
 define('CONSUMER_SECRET', 'PuP4apQZJbdRc11GF4kPle48DRvabLJHzJzE6H9X6d6fGe87tJ');
-define('CALLBACK_URL', 'https://160.16.52.117/PR4/test/auth/twitter/callback.php');
+define('CALLBACK_URL', '../auth/twitter/callback.php');
 
 // (このままで大丈夫)
 define('RTOKEN_URL', 'https://api.twitter.com/oauth/request_token');
