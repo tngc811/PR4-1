@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 
 require('util.php');
 
@@ -60,13 +60,17 @@ $res = file_get_contents(INFO_URL . '?' . http_build_query($params));
 //sessionにユーザidを保存
 //$_SESSION['UserID'] = $user_id;
 //echo $_SESSION['UserID'];
-
-//echo "<script type='text/javascript'> windows.sessionStorage.setItem(['UserID'],['".$user_id."']);</script>";
-echo "<script type='text/javascript'> windows.sessionStorage.setItem(['UserID'],['a']);</script>";
-
+echo "
+			<script>
+			window.sessionStorage.setItem('UserID','".$user_id."');
+			//alert(window.sessionStorage.getItem('UserID'));
+			//どっか飛ばしてもいいよ
+			location.href='../../test.html';
+			</script>
+		 ";
 
 
 //↓リダイレクト処理、(レビューページに飛ばせばいいと思う)
-header('location:../../PR4/login.html');
+//header('location:../../PR4/login.html');
 //処理を終了させる
 exit();

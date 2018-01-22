@@ -43,16 +43,15 @@ $res = file_get_contents(INFO_URL . '?' . http_build_query($params));
 $UserData= json_decode($res,true);
 
 //$_SESSION['UserID'] =$UserData['id'];
-//echo "<script type='text/javascript'> windows.sessionStorage.setItem(['UserID'],['".$UserData['id']."']);</script>";
+
 echo "
-		<script type='text/javascript'>
-		console.log('test');
-			windows.sessionStorage.setItem(['UserID'],['a']);
-			console.log(windows.sessionStorage.getItem['UserID']);
-		</script>
-";
+			<script>
+			window.sessionStorage.setItem('UserID','".$UserData['id']."');
+			alert('a');
+			</script>
+		 ";
 
 //urlにリダイレクト(レビューページに飛ばせばいいと思う)
-header('location:../../PR4/login.html');
+//header('location: ../../test.html');
 //処理を終了させる
 exit();
