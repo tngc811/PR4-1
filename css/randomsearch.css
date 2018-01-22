@@ -6,6 +6,7 @@ body{
   display: flex;
   flex-direction: column;
   height: 100vh;
+  background-image: url("../img/01-whitepaper.png");
 }
 a:link { color:rgb(0, 0, 0); text-decoration:none }
 a:visited { color:#0000ff; text-decoration:none }
