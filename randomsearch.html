@@ -8,7 +8,7 @@
   <!-- BootstrapのCSS読み込み -->
   <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="css/shop_contents.css" rel="stylesheet">
-  <link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.min.css" />
+  <link type="text/css" rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/cupertino/jquery-ui.min.css" />
   <!-- jQuery読み込み -->
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <!-- BootstrapのJS読み込み -->
@@ -407,7 +407,7 @@ alert("ルート検索時に位置情報を使用します。");
                   $.ajax({
                     type: 'POST',
                     //変えてね！
-                    url: 'http://localhost/search.php',
+                    url: 'https://160.16.52.117/PR4/test/PR4/search.php',
                     dataType: 'text',
                     data: {
                       "age" : s_age,
@@ -466,7 +466,7 @@ alert("ルート検索時に位置情報を使用します。");
             location.href = 'https://maps.google.com/maps?daddr='+shoplat+','+shoplng+'&saddr='+lat+','+lng;
           } else{
             //アップルのマップを起動(現在地から目的地までのルート)
-            location.href = 'http://maps.apple.com/maps?daddr=' + shoplat + ',' + shoplng+'&saddr='+lat+','+lng;
+            location.href = 'https://maps.apple.com/maps?daddr=' + shoplat + ',' + shoplng+'&saddr='+lat+','+lng;
           }
         });
       });
@@ -647,6 +647,7 @@ alert("ルート検索時に位置情報を使用します。");
   </div>
 
 <!-- ダイアログ処理 -->
+<!--
   <div id="Dialog_form">
     <form class="" method="post">
       <h4 style="display:inline">性別</h4>
@@ -695,5 +696,60 @@ alert("ルート検索時に位置情報を使用します。");
       <br>
     </form>
   </div>
+-->
+
+  <div id="Dialog_form" class="gourmet_list container">
+    <div class="row">
+      <div class="hot_list col-xs-12">
+        <form class="" method="post">
+          <h4 style="display:inline">性別</h4>
+          男性
+          <input type="radio" class="sei" name="sei" value="1"> 女性
+          <input type="radio" class="sei" name="sei" value="2">
+          <br>
+          <h4 style="display:inline">年代</h4>
+          <select class="age" name="">
+              <option value="">---</option>
+              <option value="1">10代</option>
+              <option value="2">20代</option>
+              <option value="3">30代</option>
+              <option value="4">40代</option>
+              <option value="5">50代</option>
+              <option value="6">60代~</option>
+            </select><br>
+          <h4 style="display:inline">人数</h4>
+          <select class="h_num" name="">
+              <option value="">---</option>
+              <option value="1">1人</option>
+              <option value="2">2~4人</option>
+              <option value="3">5~10人</option>
+              <option value="4">それ以上</option>
+            </select>
+          <br>
+          <h4 style="display:inline">ボリューム感</h4>
+          <select class="volume" name="">
+              <option value="">---</option>
+              <option value="1">がっつり</option>
+              <option value="2">ふつう</option>
+              <option value="3">少なめ</option>
+            </select>
+          <br>
+          <h4 style="display:inline">お店の雰囲気</h4>
+          <select class="atm" name="" required>
+              <option value="">---</option>
+              <option value="1">静か</option>
+              <option value="2">にぎやか</option>
+              <option value="3">一人で入りやすい</option>
+              <option value="4">女性でも入りやすい</option>
+            </select>
+          <br>
+          <h4 style="display:inline">評価</h4>
+          <div style="display:inline" id="rateit1" required></div>
+          <br>
+        </form>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

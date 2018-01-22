@@ -27,7 +27,7 @@ $eva = $_POST['eva']; //評価
 //DBにアクセス
 try {
   //変えてね！
-$pdo = new PDO('mysql:host=localhost;dbname=userreview;charset=utf8','root','',
+$pdo = new PDO('mysql:host=localhost;dbname=UserReview;charset=utf8','root','root',
 array(PDO::ATTR_EMULATE_PREPARES => false));
 //確認
 //echo "success";
