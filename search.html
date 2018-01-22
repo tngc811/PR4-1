@@ -47,6 +47,7 @@
 
     $(function(){
   console.log("logintest");
+  /*
   if (window.sessionStorage.getItem(['UserID']) == null) {
     $('.nav').append('<li class="login-Label"><a href="login.html">login</a></li>');
     console.log(window.sessionStorage.getItem(['UserID']));
@@ -60,6 +61,7 @@
     console.log("logout");
     logout();
   }
+  */
 });
 
 function logout(){
@@ -411,8 +413,8 @@ console.log(window.sessionStorage.getItem(['UserID']));
 
     <div id="gnavi" class="collapse navbar-collapse" style="background-color:rgb(240, 240, 240);">
       <ul class="nav label navbar-nav">
-         <li><a href="index.html">みーる</a></li> 　<!-- 後日ロゴ画像に差し替えたい -->
-        <!--<li><a href="login.html">login</a></li>-->
+         <li style="font-size:20px;"><a href="index.html">みーる</a></li> 　<!-- 後日ロゴ画像に差し替えたい -->
+        <li style="font-size:20px;"><a href="login.html">ログイン</a></li>
       </ul>
     </div>
   </nav>

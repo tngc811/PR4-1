@@ -199,7 +199,9 @@ alert("ルート検索時、位置情報を使用します");
       } else {
         res += '<th class="warning">カード利用</th><th>データなし</th>'
       }
+
       res += '</tr><tr>'
+
       if ("[object Object]"　 != 　g_get.rest.e_money) {
         res += '<th class="warning">電子マネー利用</th><th>' + g_get.rest.e_money + '</th>';
       } else {
@@ -741,8 +743,8 @@ alert("ルート検索時、位置情報を使用します");
 
     <div id="gnavi" class="collapse navbar-collapse">
       <ul class="nav navbar-nav">
-        <li><a href="index.html">みーる</a></li>
-      <li><a href="login.html">login</a></li>
+        <li style="font-size:20px;"><a href="index.html">みーる</a></li>
+      <li style="font-size:20px;"><a href="login.html">ログイン</a></li>
       </ul>
     </div>
   </nav>
