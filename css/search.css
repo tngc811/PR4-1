@@ -84,6 +84,12 @@ a:active { color:#0000ff; text-decoration:none }
     padding: 20px;
   }
 
+  .top-menu{
+    font-family:Nico Moji;
+    color:#ff8181;
+    font-size:25px;
+  }
+
 }
 
 /* PC(幅が768px以上) */
@@ -156,6 +162,12 @@ a:active { color:#0000ff; text-decoration:none }
     text-align: center;
     flex-shrink: 0;
     padding: 20px;
+  }
+
+  .top-menu{
+    font-family:Nico Moji;
+    color:#ff8181;
+    font-size:30px;
   }
 
 }
