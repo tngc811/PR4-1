@@ -111,7 +111,8 @@ console.log(window.sessionStorage.getItem(['UserID']));
           //  console.log("成功1");
           html_add();
         } else {
-          res += '<input onclick="load_btn()" type="button" class="list_btn" value=" さらに表示　">';
+        //  res += '<div class="sarani"><input onclick="load_btn()" type="button" class="list_btn" value=" さらに表示　"></div>';
+            $('.va').after('<input onclick="load_btn()" type="button" class="list_btn" value=" さらに表示　">');
           //$('.hot_contents').filter(":last").after(res);
           //  console.log("成功2");
           html_add();
@@ -336,7 +337,8 @@ console.log(window.sessionStorage.getItem(['UserID']));
                   }
                   //      console.log("成功01");
                   cnt += 9;
-                  res += ' <div class="nbtn"><input onclick="load_btn()" type="button" class="list_btn" name="" value="さらに表示"></div>';
+              //    res += ' <div class="nbtn"><input onclick="load_btn()" type="button" class="list_btn" name="" value="さらに表示"></div>';
+              $('.va').after('<input onclick="load_btn()" type="button" class="list_btn" value=" さらに表示　">');
                   $(".hot_contents").remove();
                   html_add2();
                   res = "";
@@ -386,7 +388,8 @@ console.log(window.sessionStorage.getItem(['UserID']));
                 }
                 //    console.log("成功01");
                 cnt += 9;
-                res += '<br /><div class="nbtn"><input onclick="load_btn()" type="button" class="list_btn" name="" value="さらに表示"></div>';
+            //    res += '<br /><div class="nbtn"><input onclick="load_btn()" type="button" class="list_btn" name="" value=".表示"></div>';
+                $('.va').after('<input onclick="load_btn()" type="button" class="list_btn" value=" さらに表示　">');
                 $(".hot_contents").remove();
                 html_add2();
                 res = "";
@@ -422,6 +425,7 @@ console.log(window.sessionStorage.getItem(['UserID']));
   </nav>
 
   <!--検索フォーム-->
+  <div>
   <form class="form-inline" action="" method="post">
     <div class="form-group center-block">
       <div class="form">
@@ -469,13 +473,23 @@ console.log(window.sessionStorage.getItem(['UserID']));
         </div>
       </div>
     </div>
+    <div class="btn-Space">
+      <div class="va">
+
+      </div>
+
+    </div>
   </div>
 
+
+
+</div>
 
 
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb3Mm8zzsqCNFTr-_LNNkQMtYKTV000PA&callback=initMap" async defer></script>
 
   <!-- フッター(クレジット) -->
+
   <footer class="footer">
     Powered by
       <!-- ぐるなび -->
