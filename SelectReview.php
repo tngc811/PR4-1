@@ -17,7 +17,7 @@ try {
 
 $rec =$stmt->fetch(PDO::FETCH_ASSOC);
   if ($rec == "") {
-    echo $rec;
+    echo json_encode($rec);
   }else {
     echo json_encode($rec);
   }
