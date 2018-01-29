@@ -32,6 +32,7 @@
     var hot_rep = ""; //ホットペッパーget用変数
     const hot_api_key　 = 　"10f59688fc27c9e0"; //ホットペッパーapi_key
     var hot_get = ""; //ホットペッパーデータ格納用
+    var review = ""; //Review取得用
     var keyid = ""; //ぐるなびapi_key
     var g_rep = ""; //ぐるなびget用変数
     var g_get = ""; //ぐるなびデータ格納用
@@ -73,6 +74,12 @@
       //  logout();
       }
 });
+
+
+
+
+
+
 /*
 function logout(){
   $(".login-Label").remove();
@@ -109,7 +116,7 @@ alert("ルート検索時、位置情報を使用します");
       console.log(hot_get.results.shop[0].lat);
 
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
-      res += '<h4 class="hot_name sname">店舗名</h4>' + hot_get.results.shop[0].name + '<br />';
+      res += '<h3 class="hot_name sname">' + hot_get.results.shop[0].name + '</h3><br />';
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
         res += '<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" /><br />';
@@ -118,28 +125,40 @@ alert("ルート検索時、位置情報を使用します");
         res +='<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" /><br />';
 
       }
+      //res +='<div style="display:inline" class="rateit_review"></div><br />';
 
-      res += '<table class="table table-bordered"><tbody><tr>'
-      res += '<th class="warning">住所</th><th>' + hot_get.results.shop[0].address + '</th>';
+
+      res += '<table class="table table-bordered"><tbody><tr>';
+
+      res +='<th class="warning">評価</th>'
+
+      res +='<th class="active">';
+
+      res += '<div style="display:inline" class="rateit_review"></div>';
+      res +='</th>';
+
       res += '</tr><tr>'
-      res += '<th class="warning">開店時間</th><th>' + hot_get.results.shop[0].open + '</th>';
+
+      res += '<th class="warning">住所</th><th class="active">' + hot_get.results.shop[0].address + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">閉店時間</th><th>' + hot_get.results.shop[0].close + '</th>';
+      res += '<th class="warning">開店時間</th><th class="active">' + hot_get.results.shop[0].open + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">ランチ</th><th>' + hot_get.results.shop[0].lunch + '</th>';
+      res += '<th class="warning">閉店時間</th><th class="active">' + hot_get.results.shop[0].close + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">２３時以降</th><th>' + hot_get.results.shop[0].midnight + '</th>';
+      res += '<th class="warning">ランチ</th><th class="active">' + hot_get.results.shop[0].lunch + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">パーキング</th><th>' + hot_get.results.shop[0].parking + '</th>';
+      res += '<th class="warning">２３時以降</th><th class="active">' + hot_get.results.shop[0].midnight + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">パーキング</th><th class="active">' + hot_get.results.shop[0].parking + '</th>';
       res += '</tr><tr>'
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
 
-        res += '<th class="warning">URL</th> <th>' + hot_get.results.shop[0].urls.mobile+ '</th>';
+        res += '<th class="warning">URL</th> <th class="active">' + hot_get.results.shop[0].urls.mobile+ '</th>';
 
       } else {
 
-        res += '<th class="warning">URL</th><th>' + hot_get.results.shop[0].urls.pc+ '</th>';
+        res += '<th class="warning">URL</th><th class="active">' + hot_get.results.shop[0].urls.pc+ '</th>';
 
       }
       res += '</tr><tr>'
@@ -197,17 +216,17 @@ alert("ルート検索時、位置情報を使用します");
 
       res += '</tr><tr>'
       if ("[object Object]" != g_get.rest.credit_card) {
-        res += '<th class="warning">カード利用</th><th>' + g_get.rest.credit_card + '</th>';
+        res += '<th class="warning">カード利用</th><th class="active">' + g_get.rest.credit_card + '</th>';
       } else {
-        res += '<th class="warning">カード利用</th><th>データなし</th>'
+        res += '<th class="warning">カード利用</th><th class="active">データなし</th>'
       }
 
       res += '</tr><tr>'
 
       if ("[object Object]"　 != 　g_get.rest.e_money) {
-        res += '<th class="warning">電子マネー利用</th><th>' + g_get.rest.e_money + '</th>';
+        res += '<th class="warning">電子マネー利用</th><th class="active">' + g_get.rest.e_money + '</th>';
       } else {
-        res += '<th class="warning">電子マネー利用</th><th>データなし</th>'
+        res += '<th class="warning">電子マネー利用</th><th class="active">データなし</th>'
       }
       res += '</tr></tbody></table>'
       res += '</div>';
@@ -222,7 +241,7 @@ alert("ルート検索時、位置情報を使用します");
 
 
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
-      res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
+      res += '<h3 class="hot_name sname">' + hot_get.results.shop[0].name + '</h3><br />';
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
         res += '<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
@@ -231,30 +250,41 @@ alert("ルート検索時、位置情報を使用します");
         res +='<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
 
       }
-
+      //res +='<div style="display:inline" class="rateit_review"></div><br />';
 
       res += '<table class="table table-bordered"><tbody><tr>'
-      res += '<th class="warning">住所</th><th>' + hot_get.results.shop[0].address + '</th>';
+
+      res +='<th class="warning">評価</th>'
+
+      res +='<th class="active">';
+
+      res += '<div style="display:inline" class="rateit_review"></div>';
+      res +='</th>';
+
       res += '</tr><tr>'
-      res += '<th class="warning">開店時間</th><th>' + hot_get.results.shop[0].open + '</th>';
+
+
+      res += '<th class="warning">住所</th><th class="active">' + hot_get.results.shop[0].address + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">閉店時間</th><th>' + hot_get.results.shop[0].close + '</th>';
+      res += '<th class="warning">開店時間</th><th class="active">' + hot_get.results.shop[0].open + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">ランチ</th><th>' + hot_get.results.shop[0].lunch + '</th>';
+      res += '<th class="warning">閉店時間</th><th class="active">' + hot_get.results.shop[0].close + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">２３時以降</th><th>' + hot_get.results.shop[0].midnight + '</th>';
+      res += '<th class="warning">ランチ</th><th class="active">' + hot_get.results.shop[0].lunch + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">パーキング</th><th>' + hot_get.results.shop[0].parking + '</th>';
+      res += '<th class="warning">２３時以降</th><th class="active">' + hot_get.results.shop[0].midnight + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">パーキング</th><th class="active">' + hot_get.results.shop[0].parking + '</th>';
       res += '</tr><tr>'
 
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
 
-        res += '<th class="warning">URL</th><th>' + hot_get.results.shop[0].urls.mobile+ '</th>';
+        res += '<th class="warning">URL</th><th class="active">' + hot_get.results.shop[0].urls.mobile+ '</th>';
 
       } else {
 
-        res += '<th class="warning">URL</th><th>' + hot_get.results.shop[0].urls.pc+ '</th>';
+        res += '<th class="warning">URL</th><th class="active">' + hot_get.results.shop[0].urls.pc+ '</th>';
 
       }
 
@@ -312,14 +342,14 @@ alert("ルート検索時、位置情報を使用します");
 
       res += '</tr><tr>'
       if ("[object Object]" != g_get.rest.credit_card) {
-        res += '<th class="warning">カード利用</th><th>' + g_get.rest.credit_card + '</th>';
+        res += '<th class="warning">カード利用</th><th class="active">' + g_get.rest.credit_card + '</th>';
       } else {
-        res += '<th class="warning">カード利用</th><th>データなし</th>'
+        res += '<th class="warning">カード利用</th><th class="active">データなし</th>'
       }
       if ("[object Object]"　 != 　g_get.rest.e_money) {
-        res += '<th class="warning">電子マネー利用</th><th>' + g_get.rest.e_money + '</th>';
+        res += '<th class="warning">電子マネー利用</th><th class="active">' + g_get.rest.e_money + '</th>';
       } else {
-        res += '<th class="warning">電子マネー利用</th><th>データなし</th>'
+        res += '<th class="warning">電子マネー利用</th><th class="active">データなし</th>'
       }
       res += '</tr></tbody></table>'
       res += '</div>';
@@ -331,7 +361,7 @@ alert("ルート検索時、位置情報を使用します");
       shoplog = hot_get.results.shop[0].lng;
 
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
-      res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
+      res += '<h3 class="hot_name sname">' + hot_get.results.shop[0].name + '</h3><br />';
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
         res += '<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
@@ -342,25 +372,35 @@ alert("ルート検索時、位置情報を使用します");
       }
 
       res += '<table class="table table-bordered"><tbody><tr>'
-      res += '<th class="warning">住所</th><th>' + hot_get.results.shop[0].address + '</th>';
+
+      res +='<th class="warning">評価</th>'
+
+      res +='<th class="active">';
+
+      res += '<div style="display:inline" class="rateit_review"></div>';
+      res +='</th>';
+
       res += '</tr><tr>'
-      res += '<th class="warning">開店時間</th><th>' + hot_get.results.shop[0].open + '</th>';
+
+      res += '<th class="warning">住所</th><th class="active">' + hot_get.results.shop[0].address + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">閉店時間</th><th>' + hot_get.results.shop[0].close + '</th>';
+      res += '<th class="warning">開店時間</th><th class="active">' + hot_get.results.shop[0].open + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">ランチ</th><th>' + hot_get.results.shop[0].lunch + '</th>';
+      res += '<th class="warning">閉店時間</th><th class="active">' + hot_get.results.shop[0].close + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">２３時以降</th><th>' + hot_get.results.shop[0].midnight + '</th>';
+      res += '<th class="warning">ランチ</th><th class="active">' + hot_get.results.shop[0].lunch + '</th>';
       res += '</tr><tr>'
-      res += '<th class="warning">パーキング</th><th>' + hot_get.results.shop[0].parking + '</th>';
+      res += '<th class="warning">２３時以降</th><th class="active">' + hot_get.results.shop[0].midnight + '</th>';
+      res += '</tr><tr>'
+      res += '<th class="warning">パーキング</th><th class="active">' + hot_get.results.shop[0].parking + '</th>';
       res += '</tr><tr>'
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
 
-        res += '<th class="warning">URL</th><th>' + hot_get.results.shop[0].urls.mobile+ '</th>';
+        res += '<th class="warning">URL</th><th class="active">' + hot_get.results.shop[0].urls.mobile+ '</th>';
 
       } else {
 
-        res += '<th class="warning">URL</th><th>' + hot_get.results.shop[0].urls.pc+ '</th>';
+        res += '<th class="warning">URL</th><th class="active">' + hot_get.results.shop[0].urls.pc+ '</th>';
 
       }
       res += '</tr></tbody></table>'
@@ -388,6 +428,7 @@ alert("ルート検索時、位置情報を使用します");
 
     function b() {
       add_res2();
+      star_review()
     }
 
     if (hot_shop_id != null) { //店IDの空白判定
@@ -433,6 +474,7 @@ alert("ルート検索時、位置情報を使用します");
 
 
           add_res();
+          star_review()
           $('.hot_contents').filter(":last").after(res); //HMLTを追加
           console.log(hot_get);
           console.log(g_get);
@@ -482,6 +524,7 @@ alert("ルート検索時、位置情報を使用します");
         } else {
           console.log("あうととととっと2");
           add_res3();
+          star_review()
           $('.hot_contents').filter(":last").after(res);
         }
       }
@@ -727,6 +770,37 @@ alert("ルート検索時、位置情報を使用します");
           });
         });*/
     });
+function star_review() {
+    $(function () {
+
+      $.ajax({
+        type: 'POST',
+        url: 'SelectReview.php',
+        data: {
+          hot_shop_id:hot_shop_id,
+        },
+        success: function(arr) {
+          var array = JSON.parse(arr);
+          console.log(array);
+          if (array == "") {
+            console.log("select失敗");
+          }else {
+            console.log("select成功");
+            console.log(array['gender']);
+
+              $.fn.raty.defaults.path = "img/images";
+
+              $('.rateit_review').raty({
+                readOnly: true,
+                number: 5,
+                score: array['eva'],
+              });
+          }
+        }
+      });
+
+    });
+  }
 
   </script>
 </head>
@@ -758,7 +832,7 @@ alert("ルート検索時、位置情報を使用します");
     <div class="row">
 
       <div class="hot_contents col-xs-12">
-
+        <!-- <div style="display:inline" id="rateit_review"></div> -->
       </div>
       <!-- ルート検索ボタン -->
       <input type="button" value="ルート" class="js--apply route_btn" />
@@ -816,6 +890,7 @@ alert("ルート検索時、位置情報を使用します");
       </div>
     </div>
   </div>
+
 
 
 
