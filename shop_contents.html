@@ -781,6 +781,7 @@ function star_review() {
         },
         success: function(arr) {
           var array = JSON.parse(arr);
+          console.log("結果");
           console.log(array);
           if (array == "") {
             console.log("select失敗");
