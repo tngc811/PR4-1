@@ -1,5 +1,5 @@
 <?php
-//c
+$hot_shop_id = $_POST['hot_shop_id'];
 try {
   $dsn = 'mysql:dbname=UserReview;host=localhost';
   $user ='root';
@@ -7,8 +7,6 @@ try {
 
   $dbh = new PDO($dsn,$user,$password);
   $dbh->query('SET NAMES utf8');
-
-  $hot_shop_id = 'J000972035';
 
   $sql = "SELECT * FROM Summary WHERE shopid = '".$hot_shop_id."'";
 
