@@ -58,6 +58,13 @@ background-image: url("../img/01-whitepaper.png");
     color:#ff8181;
     font-size:30px;
   }
+
+  .footer{
+    text-align: center;
+    flex-shrink: 0;
+    padding: 20px;
+  }
+
   .btn{
     font-size:22px;
   }

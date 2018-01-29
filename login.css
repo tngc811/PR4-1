@@ -97,6 +97,12 @@ body{
     font-size:25px;
   }
 
+  .footer{
+    text-align: center;
+    flex-shrink: 0;
+    padding: 20px;
+  }
+
 }@media screen and (min-width:768px){
 
   .login{
@@ -144,5 +150,11 @@ body{
     font-family:Nico Moji;
     color:#ff8181;
     font-size:30px;
+  }
+
+  .footer{
+    text-align: center;
+    flex-shrink: 0;
+    padding: 20px;
   }
 }
