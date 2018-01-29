@@ -34,6 +34,8 @@ try {
 
   $dbh = null;
 
+  echo "faklfajndfs";
+
 
 } catch (Exception $e) {
 
