@@ -784,6 +784,11 @@ function star_review() {
           console.log(array);
           if (array == "") {
             console.log("select失敗");
+            $('.rateit_review').raty({
+              readOnly: true,
+              number: 5,
+              score: 0,
+            });
           }else {
             console.log("select成功");
             console.log(array['gender']);
