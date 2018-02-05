@@ -42,7 +42,7 @@ a:active { color:#0000ff; text-decoration:none }
     width: 350px;
     height: 300px;
     float: left;
-    background-image: url("../img/04-whitepaper.jpg");
+    /* background-image: url("../img/50.png"); */
   /* かどまる */
     border-radius: 10px;
     -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */
