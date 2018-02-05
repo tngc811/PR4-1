@@ -405,6 +405,7 @@ alert("ルート検索時に位置情報を使用します。");
               for(i=0; i<data.results.shop.length;i++){
                 s_id[i] = data.results.shop[i].id;
               }
+
               //条件が指定されている場合
                 if(s_age == 0 && s_num == 0　&& s_vol == 0　&& s_atm == 0　&& s_eva == 0){
                   //条件指定していない場合ランダム検索を実施
@@ -440,6 +441,7 @@ alert("ルート検索時に位置情報を使用します。");
                       "data" : s_id
                     },
                     success: function(s_data) {
+
                       console.log(s_data);
                       s_data = JSON.parse(s_data);
                       if(s_data.length > 0){

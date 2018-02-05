@@ -1,5 +1,4 @@
 <?php
-
 //条件を取得
 $array = array(
   '0' => $_POST['age'], //年代
@@ -39,8 +38,9 @@ for($i = 0; $i<count($data); $i++){
   //確認
 //  echo "SELECT * FROM summary WHERE 'shopid' = '".$data[$i];
   //select文実行
-  $stmt = $pdo->query("SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE 'shopid' = '".$data[$i]."'");
-//  $stmt = $pdo->query("SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE `shopid` = 'J000972035'");
+  //$stmt = $pdo->query("SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE 'shopid' = '".$data[$i]."'");
+    $stmt = $pdo->query("SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE `shopid` = `J000972035`");
+    print("SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE `shopid` = 'J000972035'");
   //$rowに取得したデータを入れる
   $row = $stmt -> fetch(PDO::FETCH_ASSOC);
 
