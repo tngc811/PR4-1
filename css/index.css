@@ -3,13 +3,13 @@ background-image: url("../img/01-whitepaper.png");
 
 }
 
-
+/* すまほ */
 @media screen and (max-width:767px) {
 
   .center-block{
   width: 60%;
   position:relative;
-  top: 170px;
+  top: 120px;
   }
 
   #mi-ru{
@@ -28,16 +28,27 @@ background-image: url("../img/01-whitepaper.png");
     font-size:25px;
   }
 
+.wrapper{
+  top:10px;
+}
+
+  .s_btn{
+    font-family:Nico Moji;
+    color:#ff8181;
+    font-size:25px;
+  }
+  .r_btn{
+    font-family:Nico Moji;
+    color:#ff8181;
+    font-size:25px;
+  }
   .footer{
     text-align: center;
     flex-shrink: 0;
     padding: 20px;
   }
 
-  .btn{
-    font-size:30px;
-  }
-
+/* PC */
 }@media screen and (min-width:768px){
   .center-block{
   width: 60%;
@@ -65,7 +76,14 @@ background-image: url("../img/01-whitepaper.png");
     padding: 20px;
   }
 
-  .btn{
+  .s_btn{
+    font-family:Nico Moji;
+    color:#fff;
+    font-size:22px;
+  }
+  .r_btn{
+    font-family:Nico Moji;
+    color:#fff;
     font-size:22px;
   }
 }
