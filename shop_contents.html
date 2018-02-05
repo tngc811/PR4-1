@@ -128,7 +128,7 @@ alert("ルート検索時、位置情報を使用します");
       //res +='<div style="display:inline" class="rateit_review"></div><br />';
 
 
-      res += '<table class="table table-bordered"><tbody><tr>';
+      res += '<br><table class="table table-bordered"><tbody><tr>';
 
       res +='<th class="warning">評価</th>'
 
@@ -244,15 +244,15 @@ alert("ルート検索時、位置情報を使用します");
       res += '<h3 class="hot_name sname">' + hot_get.results.shop[0].name + '</h3><br />';
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
-        res += '<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+        res += '<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" /><br />';
 
       } else {
-        res +='<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+        res +='<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" /><br />';
 
       }
       //res +='<div style="display:inline" class="rateit_review"></div><br />';
 
-      res += '<table class="table table-bordered"><tbody><tr>'
+      res += '<br><table class="table table-bordered"><tbody><tr>'
 
       res +='<th class="warning">評価</th>'
 
@@ -364,14 +364,14 @@ alert("ルート検索時、位置情報を使用します");
       res += '<h3 class="hot_name sname">' + hot_get.results.shop[0].name + '</h3><br />';
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
-        res += '<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+        res += '<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" /><br />';
 
       } else {
-        res +='<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
+        res +='<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" /><br />';
 
       }
 
-      res += '<table class="table table-bordered"><tbody><tr>'
+      res += '<br><table class="table table-bordered"><tbody><tr>'
 
       res +='<th class="warning">評価</th>'
 
