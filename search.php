@@ -13,6 +13,8 @@ $data = $_POST['data'];
 $con =array();
 //条件に合致したshopidを格納
 $agr = array();
+
+$r_count=0;
 /*$age = $_POST['age']; //年代
 $num = $_POST['num']; //人数
 $vol = $_POST['vol']; //量
@@ -26,7 +28,7 @@ $eva = $_POST['eva']; //評価
 //DBにアクセス
 try {
   //変えてね！
-$pdo = new PDO('mysql:host=localhost;dbname=UserReview;charset=utf8','root','root',
+$pdo = new PDO('mysql:host=localhost;dbname=UserReview;charset=utf8','root','',
 array(PDO::ATTR_EMULATE_PREPARES => false));
 //確認
 //echo "success";
@@ -38,11 +40,14 @@ for($i = 0; $i<count($data); $i++){
   //確認
 //  echo "SELECT * FROM summary WHERE 'shopid' = '".$data[$i];
   //select文実行
-  //$stmt = $pdo->query("SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE 'shopid' = '".$data[$i]."'");
-    $stmt = $pdo->query("SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE `shopid` = `J000972035`");
-    print("SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE `shopid` = 'J000972035'");
+  $stmt = $pdo->query("SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE `shopid` = '".$data[$i]."'");
+  //echo "SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE `shopid` = '".$data[$i]."'";
+   // $stmt = $pdo->query("SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE `shopid` = 'J000972035'");
+   // print("SELECT `age`,`num`,`volume`,`atmosphere`,`eva` FROM summary WHERE `shopid` = 'J000972035'");
   //$rowに取得したデータを入れる
   $row = $stmt -> fetch(PDO::FETCH_ASSOC);
+  
+
 
   if(!empty($row)){
     //空白チェックと条件比較
@@ -85,13 +90,13 @@ for($i = 0; $i<count($data); $i++){
     //チェック終了後
       if($con[0] == "同じ" && $con[1] == "同じ" && $con[2] == "同じ" && $con[3]=="同じ" && $con[4]=="同じ"){
         //合致したshopidを配列に格納
-        $agr[$i] = $data[$i];
+        $agr[$r_count] = $data[$i];
+		$r_count += 1;
       }
+	  
   }
 
-
   }
-
 
 //データの受け渡し
 echo json_encode( $agr );

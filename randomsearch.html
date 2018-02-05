@@ -76,7 +76,7 @@ alert("ルート検索時に位置情報を使用します。");
 
 
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
-      res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
+      res += '<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
         res += '<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
@@ -85,7 +85,7 @@ alert("ルート検索時に位置情報を使用します。");
         res +='<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
 
       }
-        res += '<table class="table table-bordered"><tbody><tr>'
+        res += '<br /><br /><table class="table table-bordered"><tbody><tr>'
 
         res += '<th class="warning">住所</th><th class="active">' + hot_get.results.shop[0].address + '</th>';
         res += '</tr><tr>'
@@ -129,7 +129,7 @@ alert("ルート検索時に位置情報を使用します。");
       shoplng = hot_get.results.shop[0].lng;
 
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
-      res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
+      res += '<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
         res += '<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
@@ -137,7 +137,7 @@ alert("ルート検索時に位置情報を使用します。");
       } else {
         res +='<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
       }
-      res += '<table class="table table-bordered"><tbody><tr>'
+      res += '<br /><br /><table class="table table-bordered"><tbody><tr>'
 
       res += '<th class="warning">住所</th><th class="active">' + hot_get.results.shop[0].address + '</th>';
       res += '</tr><tr>'
@@ -180,14 +180,14 @@ alert("ルート検索時に位置情報を使用します。");
 
 
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
-      res += '店舗名：<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
+      res += '<h4 class="hot_name sname">' + hot_get.results.shop[0].name + '</h4><br />';
 
       if ((navigator.userAgent.indexOf('iPhone') > 0 && navigator.userAgent.indexOf( 'iPad') == -1) || navigator.userAgent.indexOf('iPod') > 0 || navigator.userAgent.indexOf('Android') > 0) {
         res += '<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
       } else {
         res +='<img src=' + hot_get.results.shop[0].photo.mobile.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
       }
-      res += '<table class="table table-bordered"><tbody><tr>'
+      res += '<br /><br /><table class="table table-bordered"><tbody><tr>'
 
       res += '<th class="warning">住所</th><th class="active">' + hot_get.results.shop[0].address + '</th>';
       res += '</tr><tr>'
@@ -441,11 +441,13 @@ alert("ルート検索時に位置情報を使用します。");
                       "data" : s_id
                     },
                     success: function(s_data) {
-
+				
                       console.log(s_data);
                       s_data = JSON.parse(s_data);
+					  console.log(s_data);
                       if(s_data.length > 0){
                         random = Math.floor( Math.random() * s_data.length );
+						console.log(random);
                         hot_shop_id = s_data[random];
 
                         hot_rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + hot_api_key + '&id=' + hot_shop_id + '&range=1&order=4&count=100&format=jsonp';
@@ -685,7 +687,7 @@ alert("ルート検索時に位置情報を使用します。");
       <div class="hot_contents col-xs-12">
       </div>
       <input type="button" id="route" value="ルート" class="js--apply btn gourmet_btn"/><br/>
-      <button id="Review_button" type="button" name="button" class="js--apply btn gourmet_btn">Review</button>
+      <button id="Review_button" type="button" name="button" class="js--apply btn gourmet_btn">レビュー</button>
     </div>
   </div>
 
