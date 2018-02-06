@@ -65,14 +65,14 @@ alert("ルート検索時に位置情報を使用します。");
     //*********************HTML生成***************************
     //店の情報を取得し表示
     function add_res() {　
-      console.log("SEIKOU");
+    //  ("SEIKOU");
 
       //店の座標
       shoplat = hot_get.results.shop[0].lat;
       shoplng = hot_get.results.shop[0].lng;
 
 
-      console.log(hot_get.results.shop[0].lat);
+  //    console.log(hot_get.results.shop[0].lat);
 
 
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
@@ -86,6 +86,15 @@ alert("ルート検索時に位置情報を使用します。");
 
       }
         res += '<br /><br /><table class="table table-bordered"><tbody><tr>'
+
+        res +='<th class="warning">評価</th>'
+
+        res +='<th class="active">';
+
+        res += '<div style="display:inline" class="rateit_review"></div>';
+        res +='</th>';
+
+        res += '</tr><tr>'
 
         res += '<th class="warning">住所</th><th class="active">' + hot_get.results.shop[0].address + '</th>';
         res += '</tr><tr>'
@@ -123,7 +132,7 @@ alert("ルート検索時に位置情報を使用します。");
     }
 
     function add_res2() {
-      console.log("成功４５６５４３２４３４");
+    //  console.log("成功４５６５４３２４３４");
       cnt = 0;
       shoplat = hot_get.results.shop[0].lat;
       shoplng = hot_get.results.shop[0].lng;
@@ -138,6 +147,15 @@ alert("ルート検索時に位置情報を使用します。");
         res +='<img src=' + hot_get.results.shop[0].photo.pc.l + ' class="img-rounded" alt="" width="" height="" border="0" />';
       }
       res += '<br /><br /><table class="table table-bordered"><tbody><tr>'
+
+      res +='<th class="warning">評価</th>'
+
+      res +='<th class="active">';
+
+      res += '<div style="display:inline" class="rateit_review"></div>';
+      res +='</th>';
+
+      res += '</tr><tr>'
 
       res += '<th class="warning">住所</th><th class="active">' + hot_get.results.shop[0].address + '</th>';
       res += '</tr><tr>'
@@ -189,6 +207,15 @@ alert("ルート検索時に位置情報を使用します。");
       }
       res += '<br /><br /><table class="table table-bordered"><tbody><tr>'
 
+      res +='<th class="warning">評価</th>'
+
+      res +='<th class="active">';
+
+      res += '<div style="display:inline" class="rateit_review"></div>';
+      res +='</th>';
+
+      res += '</tr><tr>'
+
       res += '<th class="warning">住所</th><th class="active">' + hot_get.results.shop[0].address + '</th>';
       res += '</tr><tr>'
       res += '<th class="warning">開店時間</th><th class="active">' + hot_get.results.shop[0].open + '</th>';
@@ -229,12 +256,13 @@ alert("ルート検索時に位置情報を使用します。");
 
     function b() {
       add_res2();
+      star_review();
     }
     showResult = function(result) {
       g_get = result;
 
       if (result.total_hit_count == 1) { //1件だけヒットした場合
-        console.log("match成功1");
+      //  console.log("match成功1");
 
         if (g_get.rest.address.charAt(0) == "〒") {
 
@@ -246,14 +274,15 @@ alert("ルート検索時に位置情報を使用します。");
           }).slice(9);
 
           add_res();
+          star_review();
           $('.hot_contents').filter(":last").after(res); //HMLTを追加
         } else {
-          console.log("エラー");
+    //      console.log("エラー");
         }
 
       } else if (result.total_hit_count > 1) { // 1件以上ヒットした場合
-        console.log("match成功2");
-        console.log(result.total_hit_count);
+      // console.log("match成功2");
+      //  console.log(result.total_hit_count);
         g_get = result;
 
         //0-9や大角など変換
@@ -267,11 +296,11 @@ alert("ルート検索時に位置情報を使用します。");
               return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
             }).slice(9);
             if (hot_p == guru_p) {
-              console.log(hot_p);
-              console.log(guru_p);
+          //    console.log(hot_p);
+          //    console.log(guru_p);
               break;
             } else {
-              console.log("複数件失敗");
+          //    console.log("複数件失敗");
               a();
             }
           } else {
@@ -282,12 +311,13 @@ alert("ルート検索時に位置情報を使用します。");
         $('.hot_contents').filter(":last").after(res);
 
       } else { //0件の場合
-        console.log(cnt);
+    //    console.log(cnt);
         if (cnt != 3) {
           gurunabi()
         } else {
-          console.log("あうととととっと2");
+    //      console.log("あうととととっと2");
           add_res3();
+          star_review();
           $('.hot_contents').filter(":last").after(res);
         }
       }
@@ -298,21 +328,21 @@ alert("ルート検索時に位置情報を使用します。");
 
       g_rep = 'https://api.gnavi.co.jp/RestSearchAPI/20150630/?callback=?';
       if (cnt == 0) {
-        console.log("cnt=0");
+      //  console.log("cnt=0");
         params = {
           keyid: '06ebf6157586406aeebdc819d9ff3998',
           format: 'json',
           name: hot_get.results.shop[0].name,
         };
       } else if (cnt == 1) {
-        console.log("cnt=1");
+      //  console.log("cnt=1");
         params = {
           keyid: '06ebf6157586406aeebdc819d9ff3998',
           format: 'json',
           address: hot_get.results.shop[0].address,
         };
       } else if (cnt == 2) {
-        console.log("cnt=2");
+    //    console.log("cnt=2");
         var str = hiraToKana(hot_get.results.shop[0].name_kana);
         //console.log(str);
         params = {
@@ -321,7 +351,7 @@ alert("ルート検索時に位置情報を使用します。");
           name_kana: str,
         };
       } else {
-        console.log("あうととととっと");
+      //  console.log("あうととととっと");
       }
 
       $.getJSON(g_rep, params, function(result) {
@@ -363,7 +393,7 @@ alert("ルート検索時に位置情報を使用します。");
         lat = argPos.coords.latitude;          // 緯度
         lng = argPos.coords.longitude;         // 経度
 
-        console.log(lat+" "+lng);
+    //    console.log(lat+" "+lng);
         //選択されている条件の取得 指定なしの場合検索から外す
         if($('[name="range"]').val() == 0){
           s_range = 3;
@@ -381,12 +411,12 @@ alert("ルート検索時に位置情報を使用します。");
         //評価
         s_eva = $('[name="eva"]').val();
 
-        console.log(s_range);
-        console.log(s_age);
-        console.log(s_num);
-        console.log(s_vol);
-        console.log(s_atm);
-        console.log(s_eva);
+  //      console.log(s_range);
+  //      console.log(s_age);
+  //      console.log(s_num);
+  //      console.log(s_vol);
+  //      console.log(s_atm);
+    //    console.log(s_eva);
 
 
 
@@ -397,10 +427,10 @@ alert("ルート検索時に位置情報を使用します。");
             url: hot_rep,
             dataType: 'jsonp',
             success: function(data) {
-              console.log("取得したデータ");
-              console.log(data);
-              console.log(data.results.shop.length);
-              console.log(data.results.shop);
+          //    console.log("取得したデータ");
+          //    console.log(data);
+          //    console.log(data.results.shop.length);
+          //    console.log(data.results.shop);
               //idを取得
               for(i=0; i<data.results.shop.length;i++){
                 s_id[i] = data.results.shop[i].id;
@@ -420,7 +450,7 @@ alert("ルート検索時に位置情報を使用します。");
                     url: hot_rep,
                     dataType: 'jsonp',
                     success: function(randomdata) {
-                      console.log(randomdata);
+                //      console.log(randomdata);
                       hot_get = randomdata;
                       gurunabi();　 //ぐるなびデータ取得関数
                     }
@@ -441,13 +471,13 @@ alert("ルート検索時に位置情報を使用します。");
                       "data" : s_id
                     },
                     success: function(s_data) {
-				
-                      console.log(s_data);
+
+                //      console.log(s_data);
                       s_data = JSON.parse(s_data);
-					  console.log(s_data);
+				//	  console.log(s_data);
                       if(s_data.length > 0){
                         random = Math.floor( Math.random() * s_data.length );
-						console.log(random);
+				//		console.log(random);
                         hot_shop_id = s_data[random];
 
                         hot_rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + hot_api_key + '&id=' + hot_shop_id + '&range=1&order=4&count=100&format=jsonp';
@@ -456,7 +486,7 @@ alert("ルート検索時に位置情報を使用します。");
                           url: hot_rep,
                           dataType: 'jsonp',
                           success: function(randomdata) {
-                            console.log(randomdata);
+                      //      console.log(randomdata);
                             hot_get = randomdata;
                             gurunabi();　 //ぐるなびデータ取得関数
                           }
@@ -554,10 +584,10 @@ alert("ルート検索時に位置情報を使用します。");
                   RData:RData,
                 },
                 success: function(data) {
-                  console.log(data);
+            //      console.log(data);
                 }
               });
-              alert("ボタン1をクリックしました");
+              //alert("ボタン1をクリックしました");
             }
           },
           {
@@ -585,6 +615,44 @@ alert("ルート検索時に位置情報を使用します。");
         score: 0,
       });
     });
+
+    function star_review() {
+        $(function () {
+        //  console.log("すたー");
+          $.ajax({
+            type: 'POST',
+            url: 'SelectReview.php',
+            data: {
+              hot_shop_id:hot_shop_id,
+            },
+            success: function(arr) {
+              var array = JSON.parse(arr);
+          //    console.log("結果");
+            //  console.log(array);
+              if (array == "") {
+              //  console.log("select失敗");
+                $('.rateit_review').raty({
+                  readOnly: true,
+                  number: 5,
+                  score: 0,
+                });
+              }else {
+          //      console.log("select成功");
+          //      console.log(array['gender']);
+
+                  $.fn.raty.defaults.path = "img/images";
+
+                  $('.rateit_review').raty({
+                    readOnly: true,
+                    number: 5,
+                    score: array['eva'],
+                  });
+              }
+            }
+          });
+
+        });
+      }
 
   </script>
 </head>
@@ -686,8 +754,10 @@ alert("ルート検索時に位置情報を使用します。");
 
       <div class="hot_contents col-xs-12">
       </div>
-      <input type="button" id="route" value="ルート" class="js--apply btn gourmet_btn"/><br/>
-      <button id="Review_button" type="button" name="button" class="js--apply btn gourmet_btn">レビュー</button>
+    <!--  <input type="button" id="route" value="ルート" class="js--apply btn gourmet_btn"/><br/> -->
+      <input type="button" id="route" value="ルート" class="js--apply route_btn btn gourmet_btn" />
+      <button id="Review_button" type="button" name="button" class="route_btn js--apply btn gourmet_btn">レビュー</button>
+    <!--  <button id="Review_button" type="button" name="button" class="js--apply btn gourmet_btn">レビュー</button> -->
     </div>
   </div>
 

@@ -48,7 +48,7 @@
     function initMap() {}
 
     $(function(){
-  console.log("logintest");
+//  console.log("logintest");
   /*
   if (window.sessionStorage.getItem(['UserID']) == null) {
     $('.nav').append('<li class="login-Label"><a href="login.html">login</a></li>');
@@ -70,7 +70,7 @@ function logout(){
 $(".login-Label").remove();
 window.sessionStorage.setItem(['UserID'],[null]);
 $('.nav').append('<li class="login-Label"><a href="login.html">logout</a></li>');
-console.log(window.sessionStorage.getItem(['UserID']));
+//console.log(window.sessionStorage.getItem(['UserID']));
 }
 
     function add_res() {　//HTML生成
@@ -191,7 +191,7 @@ console.log(window.sessionStorage.getItem(['UserID']));
           $(".list_btn").remove();
           //  alert("初期化");
           area_get();
-          console.log("初期化");
+        //  console.log("初期化");
 
         } else if ($('.genre').val() != "G000" && $('.gourmet_area').val() != "") {　 //エリア＆ジャンルが入力されていた場合
           if ($('.gourmet_area').val()　 == 　"現在地") {
@@ -269,7 +269,7 @@ console.log(window.sessionStorage.getItem(['UserID']));
           shop_data = "";　 //ショップデータ変数
           lat = ""; // 緯度
           lng = ""; // 経度
-          console.log("失敗01");
+      //    console.log("失敗01");
         }
       }
 
@@ -311,7 +311,7 @@ console.log(window.sessionStorage.getItem(['UserID']));
             range = 3;
           }else {
             //console.log("範囲２");
-            console.log($('.range').val());
+        //    console.log($('.range').val());
             range = $('.range').val();
           }
           const api_key = "10f59688fc27c9e0";
@@ -358,11 +358,11 @@ console.log(window.sessionStorage.getItem(['UserID']));
     function genre() {
       if ($('.gourmet_area').val() != "") {
         if ($('.range').val() == "0") {
-          console.log("範囲１");
-          console.log($('.range').val());
+        //  console.log("範囲１");
+        //  console.log($('.range').val());
         }else {
-          console.log("範囲２");
-          console.log($('.range').val());
+      //    console.log("範囲２");
+      //    console.log($('.range').val());
         }
         const api_key = "10f59688fc27c9e0";
         var rep = 'https://webservice.recruit.co.jp/hotpepper/gourmet/v1/?key=' + api_key + '&lat=' + lat + '&lng=' + lng + '&range='+range+'&genre=' + $('.genre').val() + '&order=4&count=100&format=jsonp';

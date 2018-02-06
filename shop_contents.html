@@ -59,18 +59,18 @@
     //----------------------------------
 
     $(function(){
-      console.log("logintest");
+    //  console.log("logintest");
       if (window.sessionStorage.getItem(['UserID']) == null) {
   //      $('.nav').append('<li class="login-Label"><a href="login.html">login</a></li>');
-        console.log(window.sessionStorage.getItem(['UserID']));
+      //  console.log(window.sessionStorage.getItem(['UserID']));
         //$('.nav').filter(":last").after('<li><a href="login.html">login</a></li>');
-        console.log("login");
+    //    console.log("login");
       }else {
       //  $(".login-Label").remove();
         //$('.nav').filter(":last").after('<li><a href="login.html">logout</a></li>');
       //  $('.nav').append('<li class="login-Label"><a href=login.html>logout</a></li>');
-        console.log(window.sessionStorage.getItem(['UserID']));
-        console.log("logout");
+      //  console.log(window.sessionStorage.getItem(['UserID']));
+      //  console.log("logout");
       //  logout();
       }
 });
@@ -108,12 +108,12 @@ alert("ルート検索時、位置情報を使用します");
 
 
     function add_res() {　 //HTML生成
-      console.log("SEIKOU");
+    //  console.log("SEIKOU");
 
       shoplat = hot_get.results.shop[0].lat;
       shoplog = hot_get.results.shop[0].lng;
 
-      console.log(hot_get.results.shop[0].lat);
+  //    console.log(hot_get.results.shop[0].lat);
 
       res +='<div id=' + hot_get.results.shop[0].id + ' class="hot_contents scon" >';
       res += '<h3 class="hot_name sname">' + hot_get.results.shop[0].name + '</h3><br />';
@@ -233,7 +233,7 @@ alert("ルート検索時、位置情報を使用します");
     }
 
     function add_res2() {
-      console.log("成功４５６５４３２４３４");
+  //    console.log("成功４５６５４３２４３４");
       cnt = 0;
 
       shoplat = hot_get.results.shop[0].lat;
@@ -428,7 +428,7 @@ alert("ルート検索時、位置情報を使用します");
 
     function b() {
       add_res2();
-      star_review()
+      star_review();
     }
 
     if (hot_shop_id != null) { //店IDの空白判定
@@ -443,20 +443,20 @@ alert("ルート検索時、位置情報を使用します");
           dataType: 'jsonp',
           success: function(data) {
             hot_get = data;
-            console.log(data);
+        //    console.log(data);
             gurunabi();　 //ぐるなびデータ取得関数
           }
         });
       }
     } else {
-      console.log("失敗");
+    //  console.log("失敗");
     }
 
     showResult = function(result) {
       g_get = result;
 
       if (result.total_hit_count == 1) { //1件だけヒットした場合
-        console.log("match成功1");
+    //    console.log("match成功1");
         //  console.log(result.total_hit_count);
 
         if (g_get.rest.address.charAt(0) == "〒") {
@@ -474,23 +474,23 @@ alert("ルート検索時、位置情報を使用します");
 
 
           add_res();
-          star_review()
+          star_review();
           $('.hot_contents').filter(":last").after(res); //HMLTを追加
-          console.log(hot_get);
-          console.log(g_get);
-          console.log(hot_p);
-          console.log(guru_p);
+      //    console.log(hot_get);
+      //    console.log(g_get);
+      //    console.log(hot_p);
+      //    console.log(guru_p);
 
         } else {
-          console.log("エラー");
+      //    console.log("エラー");
         }
 
       } else if (result.total_hit_count > 1) { // 1件以上ヒットした場合
-        console.log("match成功2");
-        console.log(result.total_hit_count);
+    ///    console.log("match成功2");
+      //  console.log(result.total_hit_count);
         //  console.log(hot_get.results.shop[0].address);
         g_get = result;
-        console.log(result);
+      //  console.log(result);
 
         hot_p = hot_get.results.shop[0].address.replace(/\s+/g, "").replace(/[‐－―]/g, '-').replace(/[Ａ-Ｚａ-ｚ０-９]/g, function(s) {
           return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
@@ -503,11 +503,11 @@ alert("ルート検索時、位置情報を使用します");
               return String.fromCharCode(s.charCodeAt(0) - 0xFEE0)
             }).slice(9);
             if (hot_p == guru_p) {
-              console.log(hot_p);
-              console.log(guru_p);
+          //    console.log(hot_p);
+          //    console.log(guru_p);
               break;
             } else {
-              console.log("複数件失敗");
+          //    console.log("複数件失敗");
               a();
             }
           } else {
@@ -518,13 +518,13 @@ alert("ルート検索時、位置情報を使用します");
         $('.hot_contents').filter(":last").after(res);
 
       } else { //0件の場合
-        console.log(cnt);
+  //      console.log(cnt);
         if (cnt != 3) {
           gurunabi()
         } else {
-          console.log("あうととととっと2");
+        //  console.log("あうととととっと2");
           add_res3();
-          star_review()
+          star_review();
           $('.hot_contents').filter(":last").after(res);
         }
       }
@@ -535,21 +535,21 @@ alert("ルート検索時、位置情報を使用します");
 
       g_rep = 'https://api.gnavi.co.jp/RestSearchAPI/20150630/?callback=?';
       if (cnt == 0) {
-        console.log("cnt=0");
+      //  console.log("cnt=0");
         params = {
           keyid: '06ebf6157586406aeebdc819d9ff3998',
           format: 'json',
           name: hot_get.results.shop[0].name,
         };
       } else if (cnt == 1) {
-        console.log("cnt=1");
+    //    console.log("cnt=1");
         params = {
           keyid: '06ebf6157586406aeebdc819d9ff3998',
           format: 'json',
           address: hot_get.results.shop[0].address,
         };
       } else if (cnt == 2) {
-        console.log("cnt=2");
+  //      console.log("cnt=2");
         var str = hiraToKana(hot_get.results.shop[0].name_kana);
         //console.log(str);
         params = {
@@ -558,7 +558,7 @@ alert("ルート検索時、位置情報を使用します");
           name_kana: str,
         };
       } else {
-        console.log("あうととととっと");
+  //      console.log("あうととととっと");
       }
 
       $.getJSON(g_rep, params, function(result) {
@@ -585,8 +585,8 @@ alert("ルート検索時、位置情報を使用します");
 
         lat = argPos.coords.latitude;          // 緯度
         log = argPos.coords.longitude;         // 経度
-        console.log(lat);
-        console.log(log);
+    //    console.log(lat);
+    //    console.log(log);
 
       }
 
@@ -703,11 +703,11 @@ alert("ルート検索時、位置情報を使用します");
                 success: function(data) {
 
 
-                  console.log(data);
+              //    console.log(data);
 
                 }
               });
-              alert("ボタン1をクリックしました");
+            //  alert("ボタン1をクリックしました");
             }
           },
           {
@@ -781,18 +781,18 @@ function star_review() {
         },
         success: function(arr) {
           var array = JSON.parse(arr);
-          console.log("結果");
-          console.log(array);
+        //  console.log("結果");
+      //    console.log(array);
           if (array == "") {
-            console.log("select失敗");
+          //  console.log("select失敗");
             $('.rateit_review').raty({
               readOnly: true,
               number: 5,
               score: 0,
             });
           }else {
-            console.log("select成功");
-            console.log(array['gender']);
+        //    console.log("select成功");
+        //    console.log(array['gender']);
 
               $.fn.raty.defaults.path = "img/images";
 
