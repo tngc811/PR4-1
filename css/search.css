@@ -6,7 +6,7 @@ body{
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background-image: url("../img/01-whitepaper.png");
+  background-image: url("../img/04-whitepaper.jpg");
 }
 .btn-Space{
   　/*background: rgb(145, 194, 22);*/
@@ -38,11 +38,15 @@ a:active { color:#0000ff; text-decoration:none }
   .sinfo{
     margin: 10px;
     padding: 5px;
-    border: 1px solid #000000;
+  /*  border: 3px dashed #888; */
+    box-shadow: 3px 3px 5px #ddbb99;
     width: 350px;
     height: 300px;
     float: left;
-    /* background-image: url("../img/50.png"); */
+    color: #c9171e;
+  /*  background-color: #783c1d; */
+     background-image: url("../img/p0264_m.jpg");
+     
   /* かどまる */
     border-radius: 10px;
     -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */
@@ -121,12 +125,14 @@ a:active { color:#0000ff; text-decoration:none }
   .sinfo{
     margin: 10px;
     padding: 5px;
-    border: 1px solid #000000;
-  /* background-color: ;*/
+  /*  border: 3px dashed #888; */
+    box-shadow: 3px 3px 5px #ddbb99;
     width: 350px;
     height: 300px;
     float: left;
-    background-image: url("../img/04-whitepaper.jpg");
+    color: #c9171e;
+  /*  background-color: #783c1d; */
+     background-image: url("../img/p0264_m.jpg");
 
   /* かどまる */
     border-radius: 10px;
