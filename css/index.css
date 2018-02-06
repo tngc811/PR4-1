@@ -73,7 +73,7 @@ background-image: url("../img/01-whitepaper.png");
   .footer{
     text-align: center;
     flex-shrink: 0;
-    padding: 20px;
+    padding: 10px;
   }
 
   .s_btn{
