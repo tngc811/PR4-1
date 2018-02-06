@@ -42,6 +42,10 @@ a:active { color:#0000ff; text-decoration:none }
   background-color:#ff8181;
   padding:5px;
   width: 200px;
+
+  border-radius: 10px;
+  -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */
+  -moz-border-radius: 10px;   /* Firefox用 */
 }
 
 /* フッター */
