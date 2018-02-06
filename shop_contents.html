@@ -346,6 +346,7 @@ alert("ルート検索時、位置情報を使用します");
       } else {
         res += '<th class="warning">カード利用</th><th class="active">データなし</th>'
       }
+      res += '</tr><tr>'
       if ("[object Object]"　 != 　g_get.rest.e_money) {
         res += '<th class="warning">電子マネー利用</th><th class="active">' + g_get.rest.e_money + '</th>';
       } else {
@@ -703,7 +704,7 @@ alert("ルート検索時、位置情報を使用します");
                 success: function(data) {
 
 
-              //    console.log(data);
+                  console.log(data);
 
                 }
               });
