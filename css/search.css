@@ -43,10 +43,10 @@ a:active { color:#0000ff; text-decoration:none }
     width: 350px;
     height: 300px;
     float: left;
-    color: #c9171e;
+    color: #FFFFFF;
   /*  background-color: #783c1d; */
      background-image: url("../img/p0264_m.jpg");
-     
+
   /* かどまる */
     border-radius: 10px;
     -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */
@@ -130,7 +130,8 @@ a:active { color:#0000ff; text-decoration:none }
     width: 350px;
     height: 300px;
     float: left;
-    color: #c9171e;
+    color: #FFFFFF;
+    font-weight:900;
   /*  background-color: #783c1d; */
      background-image: url("../img/p0264_m.jpg");
 
