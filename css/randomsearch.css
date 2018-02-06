@@ -75,6 +75,32 @@ a:active { color:#0000ff; text-decoration:none }
     -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */
   }
 
+  /* ルート、レビューボタン */
+  .route_btn{
+    color:#FFF;
+    background-color:#ff8181;
+    padding:5px;
+    width: 200px;
+    margin-bottom: 15px;
+
+  /* かどまる */
+    border-radius: 10px;
+    -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */
+    -moz-border-radius: 10px;   /* Firefox用 */
+  }
+
+  .review_btn{
+    color:#FFF;
+    background-color:#ff8181;
+    padding:5px;
+    width: 200px;
+
+  /* かどまる */
+    border-radius: 10px;
+    -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */
+    -moz-border-radius: 10px;   /* Firefox用 */
+  }
+
   /* さらに表示！ぼたん */
   .list_btn{
     color:#FFF;
@@ -148,6 +174,31 @@ a:active { color:#0000ff; text-decoration:none }
 
   /* 検索する！ぼたん */
   .gourmet_btn{
+    color:#FFF;
+    background-color:#ff8181;
+    padding:5px;
+    width: 200px;
+
+  /* かどまる */
+    border-radius: 10px;
+    -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */
+    -moz-border-radius: 10px;   /* Firefox用 */
+  }
+
+  /* ルート、レビューボタン */
+  .route_btn{
+    color:#FFF;
+    background-color:#ff8181;
+    padding:5px;
+    width: 200px;
+
+  /* かどまる */
+    border-radius: 10px;
+    -webkit-border-radius: 10px;    /* Safari,Google Chrome用 */
+    -moz-border-radius: 10px;   /* Firefox用 */
+  }
+
+  .review_btn{
     color:#FFF;
     background-color:#ff8181;
     padding:5px;
